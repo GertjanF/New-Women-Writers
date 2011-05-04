@@ -1,0 +1,10 @@
+<!-- start _genrelist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "genre" %>>
+        <%= sort_link_helper "genres_list", "Genre", "upper(genre)" %>
+      </td>
+	  
+	<%= render :partial => @genres %>
+</table>
+<!-- end _genrelist.html.erb-->

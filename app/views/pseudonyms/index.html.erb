@@ -1,0 +1,28 @@
+<h1>Pseudonyms</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @pseudonyms, "pseudonym" %>
+
+</form>
+</div>
+
+<%= will_paginate @pseudonyms %>
+
+<% if editor? %>
+	<!-- Add pseudonym button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_pseudonym_path, :title => "add new pseudonym" %>
+<% end %>
+
+	<%= no_records(@pseudonyms) %>
+
+	<div class="pseudonyms_list" id="pseudonyms_list">
+		<%= render :partial => "pseudonymlist" %>
+	</div>
+	<div class="pseudonyms_list" id="pseudonyms_list">
+		<%= will_paginate @pseudonyms %>
+	</div>

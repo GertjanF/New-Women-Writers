@@ -1,0 +1,32 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Topos:", :action => "index" %>
+ <%=h @topoi.topos %>
+</h1>
+<div class="details">
+<table class="topoi details">
+<tr class="topoi details"><td class="topoi details">Name:</td><td class="topoi details"><%=h @topoi.topos %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="topoi details"><td class="topoi details">Updated at:</td><td class="topoi details"><%=h @topoi.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@topoi, 'topos') %>
+<% if admin? %>
+		<%= delete_button(@topoi, 'topos') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+<h2>Works with this topos</h2>
+<table>
+	<%= render :partial => "work", :collection => @topoi.works, :works => @topoi.works.sort!{|a,b| a.title <=> b.title} %>
+	<%= no_records(@topoi.works) %>
+</table>
+	
+</div>

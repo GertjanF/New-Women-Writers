@@ -1,0 +1,10 @@
+<!-- start _languagelist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "language" %>>
+        <%= sort_link_helper "languages_list", "Language", "upper(language)" %>
+      </td>
+	  
+	<%= render :partial => @languages %>
+</table>
+<!-- end _languagelist.html.erb-->

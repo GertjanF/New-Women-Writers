@@ -1,0 +1,33 @@
+<% unless params[:work_id] .nil? %>
+	<b>Work:</b><br /><%= Work.find( params[:work_id] ).title %>
+	<%=  hidden_field_tag 'print[work_id]', params[:work_id] %>
+	by <%= Work.find(params[:work_id]).author.name %>
+<% else %>
+	<%= form.label :work %>:<br />
+	<%= form.collection_select( :work_id, Work.find(:all, :order => :title), :id, :short_title,{:prompt => true},{:class=>'wideselect'}) %>
+<% end %>
+
+<!-- # Year -->
+<div>
+	<%= form.label :year %>:<br />
+	<%= form.text_field :year, :size => 4, :class => "other" %>
+</div>
+
+
+<!-- # Publisher -->
+<div>
+	<%= form.label :publisher %>:<br />
+	<%= form.text_field :publisher, :class => "other" %>
+</div>
+
+<!-- # Location -->
+<div>
+	<%= form.label :location %>:<br />
+	<%= form.text_field :location, :class => "other" %>
+</div>
+
+<!-- # Edition -->
+<div>
+	<%= form.label :edition %>:<br />
+	<%= form.text_field :edition, :class => "other" %>
+</div>

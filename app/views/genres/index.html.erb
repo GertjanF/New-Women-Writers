@@ -1,0 +1,27 @@
+<h1>Genres</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @genres, "genre" %>
+
+</form>
+</div>
+
+<%= will_paginate @genres %>
+
+<% if editor? %>
+	<!-- Add author button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_genre_path, :title => "add new genre" %>
+<% end %>
+
+	<%= no_records(@genres) %>
+
+	<div class="genres_list" id="genres_list">
+		<%= render :partial => "genrelist" unless @genres.empty? %>
+	</div>
+	 <%= will_paginate @genres %>
+

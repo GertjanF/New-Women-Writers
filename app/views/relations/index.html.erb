@@ -1,0 +1,36 @@
+<h1>Relations</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+
+  <div>
+		<legend>Search by typing the relation name</legend>
+		<%= text_field_tag :search_name  %></p>
+		<%= observe_field(:search_name, 
+					:frequency => 0.50, 
+					:before => "Element.show('spinner')",
+					:success => "Element.hide('spinner')",
+					:update =>:relations_list, 
+					:url => { :action => :index }, 
+					:with => "'search_name=' +value") %>
+	<%= image_tag("ajax-loader.gif",
+              :align => "absmiddle",
+              :border => 0,
+              :id => "spinner",
+              :style =>"display: none;" ) %>
+	</div>
+
+<% if editor? %>
+	<!-- Add relation button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_relation_path, :title => "add new relation" %>
+<% end %>
+
+	<div class="relations_list" id="relations_list">
+		<%= render :partial => "relationlist" %>
+	</div>
+	<div class="relations_list" id="relations_list">
+		<%= will_paginate @relations %>
+	</div>
+</div>

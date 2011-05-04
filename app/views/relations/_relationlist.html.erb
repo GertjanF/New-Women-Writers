@@ -1,0 +1,15 @@
+<!-- start _relationlist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "parent_male" %>>
+        <%= sort_link_helper "relations_list", "Relation male ", "parent_male" %>
+      </td>
+
+      <td <%= sort_td_class_helper "parent_female" %>>
+        <%= sort_link_helper "relations_list", "Relation female", "parent_female" %>
+      </td>
+
+	<%= render :partial => @relations %>
+	<%= no_records(@relations) %>
+</table>
+<!-- end _relationlist.html.erb-->

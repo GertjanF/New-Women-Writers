@@ -1,0 +1,20 @@
+<h1>Edit print</h1>
+
+<div class="form">
+	<!-- # START:errors -->
+	<%= error_messages_for :print -%>
+	<!-- # END:errors -->
+
+	<fieldset>
+		<legend>Enter print details</legend>
+		<% form_for :print, :url => { 
+			:action => "update", 
+			:id=>@print.id, 
+			:author_id => params[:author_id]} do |form| %> 
+			
+			<%= render :partial => 'form', :object => form  %>
+				<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:action => 'show', id=>@print.id}, :title => "cancel changes"  %>
+		<% end %>
+	</fieldset>
+</div>

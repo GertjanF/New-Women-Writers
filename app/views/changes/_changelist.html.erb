@@ -1,0 +1,17 @@
+<!-- start _changelist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "user.name" %>>
+        <%= sort_link_helper "changes_list", "Changed by", "upper(users.name)" %>
+      </td>
+      <td <%= sort_td_class_helper "object_name" %>>
+        <%= sort_link_helper "changes_list", "Change made", "upper(object_name)" %>
+      </td>
+      <td <%= sort_td_class_helper "updated_at" %>>
+        <%= sort_link_helper "changes_list", "Timestamp", "changes.created_at" %>
+      </td>
+	</tr>
+	<%= render :partial => @changes %>
+	<%= no_records(@changes) %>
+</table>
+<!-- end _changelist.html.erb-->

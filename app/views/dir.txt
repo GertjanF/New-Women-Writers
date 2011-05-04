@@ -1,0 +1,51 @@
+====
+    Copyright 2009 Huygens Instituut for the History of the Netherlands, Den Haag, The Netherlands.
+
+    This file is part of New Women Writers.
+
+    New Women Writers is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    New Women Writers is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with New Women Writers.  If not, see <http://www.gnu.org/licenses/>.
+====
+
+ Volume in drive C has no label.
+ Volume Serial Number is C469-DD6C
+
+ Directory of C:\railswork\neww\app\views
+
+06-10-2009  10:19    <DIR>          .
+06-10-2009  10:19    <DIR>          ..
+30-09-2009  13:58    <DIR>          authors
+29-09-2009  13:29    <DIR>          author_urls
+28-09-2009  13:42    <DIR>          changes
+30-09-2009  13:59    <DIR>          countries
+06-10-2009  10:19                 0 dir.txt
+30-09-2009  13:59    <DIR>          genres
+28-09-2009  13:31    <DIR>          languages
+29-09-2009  16:20    <DIR>          layouts
+28-09-2009  13:30    <DIR>          libraries
+28-09-2009  13:30    <DIR>          media
+28-09-2009  13:44    <DIR>          prints
+28-09-2009  13:45    <DIR>          pseudonyms
+30-09-2009  13:59    <DIR>          receptions
+29-09-2009  13:34    <DIR>          reception_libs
+30-09-2009  09:56    <DIR>          reception_urls
+28-09-2009  13:31    <DIR>          relations
+28-09-2009  13:43    <DIR>          relation_types
+28-09-2009  13:28    <DIR>          sources
+28-09-2009  13:43    <DIR>          topois
+28-09-2009  13:29    <DIR>          users
+30-09-2009  13:59    <DIR>          works
+29-09-2009  13:30    <DIR>          work_libs
+29-09-2009  13:29    <DIR>          work_urls
+               1 File(s)              0 bytes
+              24 Dir(s)  32.942.034.944 bytes free

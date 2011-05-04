@@ -1,0 +1,6 @@
+<!-- _author_url.html.erb -->
+<tr>
+	<td><% unless author_url.author.nil? %><%= link_to h(author_url.author.name), author_path(:id => author_url.author.id) , :class=>"subauthor" %><% end %></td>
+	<td><%= link_to h(author_url.title), author_url_path(:id => author_url.id) %></td></td>
+	<td><a href="<%=h(author_url.url)%>"><%=h(author_url.url)%></a> </td>
+</tr>

@@ -1,0 +1,15 @@
+<tr>
+	<td  class="sub author" id="author_<%=h author.id %>" >
+	<% if editor? %>	
+		<!-- delete and edit buttons -->
+		<!--%= link_to image_tag("xdelete.png", :border=>0, :title => "delete this author), {:controller => "authors", :action => 'destroy', :language_id => author.language.id, :id => author.id}, :confirm => "This will delete this author. \n\nAre you sure?", :method => :delete  %-->
+		<%= link_to image_tag("xedit.png", :border=>0, :title => "edit this author"), {:controller => "authors", :action => 'edit',  :id => author.id}  %>
+	<% end %>
+
+		<!-- link to show author via title -->
+		<%=link_to h(author.name), 
+			:controller =>"authors",
+			:action => "show",
+			:id => author.id %>
+	</td>
+</tr>

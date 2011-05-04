@@ -1,0 +1,10 @@
+<!-- start _countrylist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "name" %>>
+        <%= sort_link_helper "countries_list", "Country", "upper(name)" %>
+      </td>
+	  
+	<%= render :partial => @countries %>
+</table>
+<!-- end _countrylist.html.erb-->

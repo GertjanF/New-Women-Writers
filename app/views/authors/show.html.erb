@@ -1,0 +1,120 @@
+<%= flash_notice %>
+
+<h1>
+<% if @author.reader? %> &reg;  <%end %>
+<%= link_to "Author:", :controller => 'authors', :action => "index" %>
+ <%=h @author.name %>
+ <% if admin? %>
+ <% unless approved?('authors', @author.id) %>
+	<%= link_to image_tag("xaccept.png", :border => 0, :title => "Approve the changes made to this author"), {:controller => "changes", :action => 'approve', :object_name => 'authors', :object_id => @author.id}, :confirm => "This will approve all changes made to this document \nAre you sure?"  %>
+<% end %>
+<% end %>
+<% unless @position.blank? %>
+	<div class="toright">
+		<% unless @position == 0 %>
+			<%= link_to image_tag("left.png", :border=>0, :title => "Go to the previous author in your selection"), :action => 'show', :id => @previous_author %>
+		<% end %>
+		<% unless @position == @results_length.to_i - 1 %>
+			<%= link_to image_tag("right.png", :border=>0, :title => "Go to the next author in your selection"), :action => 'show', :id => @next_author %>
+		<% end %>
+	</div>
+<% end %>
+
+	</h1>
+	
+
+<div class="details">
+<table class="author details">
+<tr class="author details"><td class="author details">Pseudonyms:</td><td class="author details"><%=h @pseudonymline %></td></tr>
+
+<tr class="author details"><td class="author details">Spouse/other names:</td><td class="author details"><%=h @author.spouse %></td></tr>
+
+<tr class="author details"><td class="author details">Gender:</td><td class="author details"><%=h @author.fullgender %></td></tr>
+
+<tr class="author details"><td class="author details">Year of birth:</td><td class="author details"><%=h @author.year_born %></td></tr>
+
+<tr class="author details"><td class="author details">Year of death:</td><td class="author details"><%=h @author.year_death %></td></tr>
+
+<!-- tr class="author details"><td class="author details">Children:</td><td class="author details"><%=h @author.children %></td></tr -->
+
+<tr class="author details"><td class="author details">About her personal situation:</td><td class="details crlfsafe"><%=h @author.personal_situation %></td></tr>
+
+<tr><td colspan="2"><hr class="line" noshade="noshade" /></td></tr>
+
+<tr class="author details"><td class="author details">Countries:</td><td class="author details"><%=h @countryline %></td></tr>
+
+<tr class="author details"><td class="author details">Languages:</td><td class="author details"><%=h @languageline %></td></tr>
+
+<tr class="author details"><td class="author details">Relations to other authors:</td>
+<td class="author details">
+<% @author.get_children.each do |key, value|  %>
+	<%= link_to value, {:id => key}, {:title => "show this author"} %><br />
+<% end %>
+<br />
+<% @author.get_parents.each do |key, value|  %>
+	<%= link_to value, {:id => key}, {:title => "show this author"} %><br />
+<% end %>
+</td></tr>
+
+<tr><td colspan="2"><hr class="line" noshade="noshade" /></td></tr>
+
+<tr class="author details"><td class="author details">About her professional situation:</td><td class="details crlfsafe"><%=h @author.financial_situation %></td></tr>
+
+<tr class="author details"><td class="author details">Elements of bibliography:</td><td class="details crlfsafe"><%=h @author.bibliography %></td></tr>
+
+
+<% if logged_in? %>
+
+<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+<tr class="author details"><td class="author details">Provisional notes:</td><td class="details crlfsafe"><%=h @author.notes %></td></tr>
+
+<% end %>
+
+<tr class="author details"><td class="author details">Websites:</td><td class="author details">
+<% unless @author.author_urls.nil? %>
+	<%= render :partial => "author_url", :collection => @author.author_urls %><% end %>
+	
+<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+<tr class="author details"><td class="author details">Editors:</td><td class="author details"><% unless @author.changes.nil? %><%= render :partial => "change", :collection => @author.changes.sort_by {|obj| obj.created_at}%><% end %></td></tr>
+
+</td></tr>
+</table>
+
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@author, 'author') %>
+<% if admin? %>
+		<%= delete_button(@author, 'author') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+<hr class="line" noshade="noshade" />
+
+<a name="list_works"><h2>Works written by this author
+	<% if editor? %><%= link_to image_tag("xadd.png", :border=>0),  
+		{:controller => "works",
+		:action => "new",
+		:author_id => @author.id}, :title => "add a work to this author" %><% end %>
+</h2>
+<table>
+	<% @numbered_work_list = 0 %>
+	<%= render :partial => "work", :collection => @author.works, :works => @author.works.sort!{|a,b| a.title <=> b.title } %>
+	<%= no_records(@author.works) %>
+</table>
+</a>
+
+<hr class="line" noshade="noshade" />
+
+<a name="list_receptions"><h2>Authors read by this author</h2>
+<table>
+	<% @numbered_reception_list = 0 %>
+	<%= render :partial => "reception", :collection => @author.receptions, :receptions => @author.receptions.sort!{|a,b| a.work.author.name <=> b.work.author.name} %>
+	<%= no_records(@author.receptions) %>
+</table>
+</a>
+</div>
+

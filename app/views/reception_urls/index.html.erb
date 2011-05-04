@@ -1,0 +1,29 @@
+<h1>Weblinks receptions</h1>
+
+<div class="form">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @reception_urls, "reception title" %>
+
+</form>
+</div>
+
+<%= will_paginate @reception_urls %>
+
+<% if editor? %>
+	<!-- Add reception_url button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_reception_url_path, :title => "add new reception_url" %>
+<% end %>
+
+	<%= no_records(@reception_urls) %>
+
+	<div class="reception_urls_list" id="reception_urls_list">
+		<%= render :partial => "reception_urllist" %>
+	</div>
+	<div class="reception_urls_list" id="reception_urls_list">
+		<%= will_paginate @reception_urls %>
+	</div>
+</div>

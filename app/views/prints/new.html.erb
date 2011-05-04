@@ -1,0 +1,19 @@
+<h1>Create a new print</h1>
+<div class="form">
+	<!-- # START:errors -->
+		<%= error_messages_for :print -%>
+	<!-- # END:errors -->
+
+  <fieldset>
+		<legend>Enter print details</legend>
+		<% form_for :print, :url => { :action => "create", :backtowork => params[:backtowork], :work_id => params[:work_id] } do |form| %> 
+			<%= render :partial => 'form', :object => form  %>
+			<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+			<% if params[:backtowork]=='print' %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:controller => 'works', :action => 'edit', :id => params[:work_id]}, :title => "cancel changes"  %>
+			<% else %>
+				<%= link_to image_tag("cancel.png", :border=>0), :action => 'index', :title => "cancel changes"  %>
+			<% end %>
+		<% end %>
+  </fieldset>
+</div>

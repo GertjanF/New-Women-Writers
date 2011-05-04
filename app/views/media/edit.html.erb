@@ -1,0 +1,19 @@
+<h1>Edit reception type</h1>
+
+<div class="form">
+	<!-- # START:errors -->
+	<%= error_messages_for :medium -%>
+	<!-- # END:errors -->
+
+	<fieldset>
+		<legend>Enter reception type details</legend>
+		<% form_for :medium, :url => { 
+			:action => "update", 
+			:id=>@medium.id} do |form| %> 
+			
+			<%= render :partial => 'form', :object => form  %>
+				<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:action => 'show', id=>@medium.id}, :title => "cancel changes"  %>
+		<% end %>
+	</fieldset>
+</div>

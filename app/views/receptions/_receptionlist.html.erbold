@@ -1,0 +1,35 @@
+<!-- start _receptionlistlist.html.erb-->
+<table>
+    <tr>
+	<td></td>
+	<td></td>
+		<td <%= sort_td_class_helper "authors_works.name" %>>
+			<%= sort_link_helper "receptions_list", "Author of work", "upper(authors_works.name)" %>
+		</td>
+		<td <%= sort_td_class_helper "works.title" %>>
+			<%= sort_link_helper "receptions_list", "Work", "upper(works.title)" %>
+		</td>
+		<td <%= sort_td_class_helper "works.publish_year" %>>
+			<%= sort_link_helper "receptions_list", "Publish year", "works.publish_year" %>
+		</td>
+		<td <%= sort_td_class_helper "authors.name" %>>
+			<%= sort_link_helper "receptions_list", "Receiver", "upper(authors.name)" %>
+		</td>
+		<td <%= sort_td_class_helper "authors.gender" %>>
+			<%= sort_link_helper "receptions_list", "Gender", "authors.gender" %>
+		</td>
+		<td <%= sort_td_class_helper "media.medium" %>>
+			<%= sort_link_helper "receptions_list", "Reception type", "upper(media.medium)" %>
+		</td>
+		<td <%= sort_td_class_helper "year" %>>
+			<%= sort_link_helper "receptions_list", "Year", "year" %>
+		</td>
+    </tr>
+
+	<% @numbered_list = 0 %>
+	<% @receptions.each do |reception| %>
+	<% @numbered_list += 1 %>
+	<%= render :partial => reception %>
+	<% end %>
+</table>
+<!-- end _receptionlist.html.erb-->

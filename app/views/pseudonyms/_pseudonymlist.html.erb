@@ -1,0 +1,13 @@
+<!-- start _pseudonymlist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "pseudonym" %>>
+        <%= sort_link_helper "pseudonyms_list", "Pseudonym", "upper(pseudonym)" %>
+      </td>
+      <td <%= sort_td_class_helper "authors.name" %>>
+        <%= sort_link_helper "pseudonyms_list", "Author", "upper(authors.name)" %>
+      </td>
+	  
+	<%= render :partial => @pseudonyms %>
+</table>
+<!-- end _pseudonymlist.html.erb-->

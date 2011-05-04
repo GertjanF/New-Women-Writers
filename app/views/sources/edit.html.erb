@@ -1,0 +1,19 @@
+<h1>Edit source</h1>
+
+<div class="form">
+	<!-- # START:errors -->
+	<%= error_messages_for :source -%>
+	<!-- # END:errors -->
+
+	<fieldset>
+		<legend>Enter source details</legend>
+		<% form_for :source, :url => { 
+			:action => "update", 
+			:id=>@source.id} do |form| %> 
+			
+			<%= render :partial => 'form', :object => form  %>
+				<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:action => 'show', id=>@source.id}, :title => "cancel changes"  %>
+		<% end %>
+	</fieldset>
+</div>

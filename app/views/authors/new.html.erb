@@ -1,0 +1,26 @@
+<span class="toright">
+	<%= link_to_function image_tag("help.png", :border => 0), "helpbox('authors', 'form')", {:title => 'Show/hide the help page'} %>
+</span>
+
+<h1>Create a record for a new author</h1>
+
+<div class="details crlfsafe" id="help"><%= @help_page.help_text %></div>
+
+<div class="form">
+<!-- # START:errors -->
+	<%= error_messages_for :author -%>
+<!-- # END:errors -->
+
+  <fieldset>
+  <legend>Enter author details</legend>
+	<% form_for :author, :url => { :action => "create" } do |form| %> <!-- <label id="code.rails_app.controller_views.3"/> -->
+	
+	<%= render :partial => 'form', :object => form  %>
+		<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+		<%= link_to image_tag("cancel.png", :border=>0), {:action => 'index'}, :title => "cancel changes"  %>
+
+		<!--%= submit_tag "Create", :class => "submit" %-->
+		<!--%= link_to "cancel", { :action => "index" }, :class => "cancel" %-->
+  <% end %>
+  </fieldset>
+</div>

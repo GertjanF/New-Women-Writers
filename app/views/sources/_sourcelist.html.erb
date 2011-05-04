@@ -1,0 +1,19 @@
+<!-- start _sourcelist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "full_name" %>>
+        <%= sort_link_helper "sources_list", "Full name", "upper(full_name)" %>
+      </td>
+      <td <%= sort_td_class_helper "short_name" %>>
+        <%= sort_link_helper "sources_list", "Name", "upper(short_name)" %>
+      </td>
+      <td <%= sort_td_class_helper "type" %>>
+        <%= sort_link_helper "sources_list", "Type", "upper(source_type)" %>
+      </td>
+      <td <%= sort_td_class_helper "progress" %>>
+        <%= sort_link_helper "sources_list", "Progress", "upper(progress)" %>
+      </td>
+	  
+	<%= render :partial => @sources %>
+</table>
+<!-- end _sourcelist.html.erb-->

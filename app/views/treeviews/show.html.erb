@@ -1,0 +1,160 @@
+<h2>An author's position between predecessors and followers</h2>
+
+<i>
+For a selected author this report shows influences received (left) and audiences found (right), as far as evidence is contained in the database.
+<br />Clicking the name of an author in the rows at the right or left makes her the centre between influences received and audiences found.
+</i>
+<br />
+<br />
+
+<% form_for :treeview, :url => { :action => "show", :id => nil } do |f| %>
+<%= collection_select( :author, :id, Author.find(:all, :order => :name), :id, :name,{:prompt => true},{:class=>'wideselect', :onchange=>'submit()', :name=>'id'}) %>
+<% end %>
+
+<br />
+<br />
+<table class="outertable" border="0">
+	<tr><td class="lines"><b>Has read</b></td><td></td><td class="lines" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Is read by</b></td></tr>
+	<tr><td class="lines">&nbsp;</td><td>&nbsp;</td><td class="lines">&nbsp;</td></tr>
+	<tr>
+		<td class="lines">
+		<table class="lines" border="0">
+		<% if(@has_read.length>1) then %>
+				<% @has_read.each do |author| %>
+					<% name=cut_at(author.name, 35) %>
+					<% if author.id == @first_has_read_id %>
+						<tr>
+							<td class="lines"><%= link_to "#{name}", treeview_path(:id => author.id), {:title => "#{author.name}" } %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/hl.gif", :class => "lines" %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/lo.gif", :class => "lines" %></td>
+						</tr>
+						<tr>
+							<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/tr.gif", :class => "lines" %></td>
+						</tr>	
+						
+					<% elsif author.id == @last_has_read_id %>
+						<tr>
+							<td class="lines"><%= link_to "#{name}", treeview_path(:id => author.id), {:title => "#{author.name}" } %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/hl.gif", :class => "lines" %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/lb.gif", :class => "lines" %></td>
+						</tr>
+						
+					<% else %>
+						<tr>
+							<td class="lines"><%= link_to "#{name}", treeview_path(:id => author.id), {:title => "#{author.name}" } %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/hl.gif", :class => "lines" %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/tl.gif", :class => "lines" %></td>
+						</tr>
+						<tr>
+							<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+							<td class="lines"><%= image_tag "lijnplaatjes/v.gif", :class => "lines" %></td>
+						</tr>
+					<% end %>
+				<% end %>
+			<% elsif(@has_read.length==1) %>
+				<tr>
+					<td class="lines"><%= link_to "#{@has_read[0].name}", treeview_path(:id => @has_read[0].id), {:title => "#{@has_read[0].name}" } %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/hl.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/lo.gif", :class => "lines" %></td>
+				</tr>
+				<tr>
+					<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/rb.gif", :class => "lines" %></td>
+				</tr>	
+			<% else %>
+				<tr>
+					<td class="lines">nobody</td>
+					<td class="lines"><%= image_tag "lijnplaatjes/hl.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/lo.gif", :class => "lines" %></td>
+				</tr>
+				<tr>
+					<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/rb.gif", :class => "lines" %></td>
+				</tr>	
+			<% end %>
+		</table>
+		</td>
+		
+		
+	
+	<td class="middleauthor ">
+		<table class="lines">
+			<tr><td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td></tr>
+			<tr>
+				<td class="lines"><%= image_tag "lijnplaatjes/hr.gif" %></td>
+				<td class="lines"><%= @author.name %></td>
+				<td class="lines"><%= image_tag "lijnplaatjes/hl.gif" %></td>
+			</tr>
+		</table>
+	</td>
+	
+	<td class="lines ">
+		<table class="lines" border="0">
+		<% if(@is_read_by.length>1) then %>
+			<% @is_read_by.each do |author| %>
+				<% name=cut_at(author.name, 35) %>
+				<% if author.id == @first_is_read_by_id %>
+					<tr>
+						<td class="lines"><%= image_tag "lijnplaatjes/ro.gif", :class => "lines" %></td>
+						<td class="lines"><%= image_tag "lijnplaatjes/hr.gif", :class => "lines" %></td>
+						<td class="lines"><%= link_to "#{name}", treeview_path(:id => author.id), {:title => "#{author.name}" } %></td>
+					</tr>
+					<tr>
+						<td class="lines"><%= image_tag "lijnplaatjes/tl.gif", :class => "lines" %></td>
+						<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+						<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+					</tr>	
+					
+				<% elsif author.id == @last_is_read_by_id %>
+					<tr>
+						<td class="lines"><%= image_tag "lijnplaatjes/rb.gif", :class => "lines" %></td>
+						<td class="lines"><%= image_tag "lijnplaatjes/hr.gif", :class => "lines" %></td>
+						<td class="lines"><%= link_to "#{name}", treeview_path(:id => author.id), {:title => "#{author.name}" } %></td>
+					</tr>
+					
+				<% else %>
+					<tr>
+						<td class="lines"><%= image_tag "lijnplaatjes/tr.gif", :class => "lines" %></td>
+						<td class="lines"><%= image_tag "lijnplaatjes/hr.gif", :class => "lines" %></td>
+						<td class="lines"><%= link_to "#{name}", treeview_path(:id => author.id), {:title => "#{author.name}" } %></td>
+					</tr>
+					<tr>
+						<td class="lines"><%= image_tag "lijnplaatjes/v.gif", :class => "lines" %></td>
+						<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+						<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+					</tr>
+				<% end %>
+			<% end %>
+		<% elsif(@is_read_by.length==1) then %>
+				<tr>
+					<td class="lines"><%= image_tag "lijnplaatjes/ro.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/hr.gif", :class => "lines" %></td>
+					<td class="lines"><%= link_to "#{@is_read_by[0].name}", treeview_path(:id => @is_read_by[0].id), {:title => "#{@is_read_by[0].name}" } %></td>
+				</tr>
+				<tr>
+					<td class="lines"><%= image_tag "lijnplaatjes/lb.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+				</tr>	
+		<% else %>
+				<tr>
+					<td class="lines"><%= image_tag "lijnplaatjes/ro.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/hr.gif", :class => "lines" %></td>
+					<td class="lines">nobody</td>
+				</tr>
+				<tr>
+					<td class="lines"><%= image_tag "lijnplaatjes/lb.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+					<td class="lines"><%= image_tag "lijnplaatjes/e.gif", :class => "lines" %></td>
+				</tr>	
+		<% end %>
+		</table>
+	</td>
+	</tr>
+
+</table>

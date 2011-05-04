@@ -1,0 +1,98 @@
+<span class="toright">
+	<%= link_to_function image_tag("help.png", :border => 0), "helpbox('authors', 'index')", {:title => 'Show/hide the help page'} %>
+	<%= link_to_function  image_tag("xsearch.png", :border=>0), "searchbox('authors')", {:title => 'Toggle searchbox on or off'} %>
+</span>
+
+<h1>Authors</h1>
+
+<div class="details crlfsafe" id="help"><%= @help_page.help_text %></div>
+
+<div class="form" id="searchbox">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+<fieldset>
+
+<span class="small toright">Do not show readers <%= check_box_tag 'no_reader', 'true', params[:no_reader], :onchange => 'document.formnaam.submit()'  %>
+</span>
+		<table>
+		<input type="hidden" name="fromauthorsearch" value="1" />
+		<%= hidden_field_tag('sort', params[:sort]) %>
+		<%= hidden_field_tag('page', params[:page]) %>
+		<%= hidden_field_tag("searchtoggle", params[:searchtoggle]) %>
+		<div class="small">Your search results can be found at the end of the search form. You can hide the search fields by clicking the green button at the top right corner.</div>	
+		
+			<tr><td>Name:</td><td><%= text_field_tag (:authorname, params[:authorname])  %>&nbsp;&nbsp;
+				<%=hidden_field_tag 'pseudonymflag', '0' %><%= check_box_tag 'pseudonymflag', '1', params[:pseudonymflag]!='0' %>
+				search in pseudonyms
+			</td></tr>
+			
+			<tr><td>Gender:</td>
+				<td><%= radio_button_tag 'gender', "", params[:gender]=='' %> All
+						<%= radio_button_tag 'gender', "F",  params[:gender]=='F' %> Female 
+						<%= radio_button_tag 'gender', "M",  params[:gender]=='M' %> Male
+						<%= radio_button_tag 'gender', "U",  params[:gender]=='U' %> Unknown
+				</td>
+			</tr>
+
+			<tr><td>Living in year:</td><td><%= text_field_tag :year, params[:year] %></td></tr>
+
+			<tr><td>Countries: </td>
+			<td>
+	<%= collection_select :author, :country_ids, Country.find(:all, :order => 'name ASC'), :id, :name, { :selected => (params[:country_ids].collect{|x| x.to_i} unless params[:country_ids].blank?) }, { :multiple => true, :name => 'country_ids[]', :size => 7 } -%>
+	
+	<div class="small">(to select or deselect more than one, use [ctrl-click])</div>
+			</td></tr>
+
+			<tr><td>Language: </td>
+			<td><%= collection_select :author, :language_ids, Language.find(:all, :order => 'language ASC'), :id, :language, { :selected => (params[:language_ids].collect{|x| x.to_i} unless params[:language_ids].blank?) }, { :multiple => true, :name => 'language_ids[]', :size => 4 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+			<tr><td>Elements of bibliography:</td><td><%= text_field_tag :bibliography, params[:bibliography]  %></td></tr>	
+			
+	<% if logged_in? %>
+	
+		<tr><td>About her personal situation:</td><td><%= text_field_tag :personal_situation, params[:personal_situation]  %></td></tr>
+		<tr><td>About her professional situation:</td><td><%= text_field_tag :financial_situation, params[:financial_situation]  %></td></tr>
+		<tr><td>Provisional notes:</td><td><%= text_field_tag :notes, params[:notes]  %></td></tr>
+	
+	<% end %>
+			
+			<tr><td>Records per page:</td><td><%= text_field_tag :per_page, params[:per_page]  %><div class="small">Not more than 500 records per page</div></td></tr>
+		</table>
+		</p>
+		<%= image_submit_tag("search.png", :title=>"search") %>
+		<%= link_to image_tag("reload.png", :border=>0), :action => 'reset_search'  %>
+
+<!--%= navigation @authors, "author name" %-->
+
+</fieldset>
+</form>
+</div>
+
+<span class="toright">
+<% if logged_in? %>
+<%= link_to image_tag("excel.png", :border => 0, :title => "Download as a spreadsheet"), :action => "excel", :sort => params[:sort] %>
+<% end %>
+</span>
+
+<a name='results'>
+<div class="recsfound"><%= "Found #{@count} records" %></div>
+</a>
+
+<%= will_paginate @authors %>
+
+<% if editor? %>
+	<!-- Add author button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_author_path, :title => "add new author" %>
+<% end %>
+
+	<%= no_records(@authors) %>
+
+	<div class="authors_list" id="authors_list">
+		<%= render :partial => "authorlist" unless @authors.empty? %>
+	</div>
+	 <%= will_paginate @authors%>
+
+</div>

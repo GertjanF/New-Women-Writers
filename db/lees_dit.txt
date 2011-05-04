@@ -1,0 +1,28 @@
+====
+    Copyright 2009 Huygens Instituut for the History of the Netherlands, Den Haag, The Netherlands.
+
+    This file is part of New Women Writers.
+
+    New Women Writers is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    New Women Writers is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with New Women Writers.  If not, see <http://www.gnu.org/licenses/>.
+====
+
+Voor het omzetten van Postgresql naar Mysql:
+- eerst in de postgresql applicatie rake db:schema:dump
+- daarna de schema file overzetten naar de mysql applicatie
+- rake db:schema:load
+- met de Postgresql client de tabellen exporteren naar csv (via de Query tool <ctrl-E>)
+- met de mysql client de tabellen importeren vanuit csv
+- in authors moet de tinyint "reader" voor het importeren omgezet worden in een char(1). 
+	Na het importeren de waarden 't'->'1' en 'f'->'0' omzetten en het veld weer in een tinyint(1) wijzigen.
+

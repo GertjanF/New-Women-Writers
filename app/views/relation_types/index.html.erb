@@ -1,0 +1,29 @@
+<h1>Relation types</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<!--%= navigation @relation_types, "female parent" %-->
+
+</form>
+</div>
+
+<%= will_paginate @relation_types %>
+
+<% if editor? %>
+	<!-- Add relation_type button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_relation_type_path, :title => "add new relation type" %>
+<% end %>
+
+	<%= no_records(@relation_types) %>
+
+	<div class="relation_types_list" id="relation_types_list">
+		<%= render :partial => "relation_typelist" %>
+	</div>
+	<div class="relation_types_list" id="relation_types_list">
+		<%= will_paginate @relation_types %>
+	</div>
+</div>

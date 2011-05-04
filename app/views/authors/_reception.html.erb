@@ -1,0 +1,25 @@
+<tr>
+	<td  class="sub reception" id="reception_<%=h reception.id %>">
+	<% @numbered_reception_list += 1 %>
+	</td>
+			
+	<td>
+		<%= link_to image_tag("xreception.png", :border=>0, :class => 'image_align_middle', :title => "view this reception"), {:controller => "receptions", :action => 'show', :id => reception.id}  %>
+	</td>
+	
+	<td class="line_number"><%= @numbered_reception_list %></td>
+	
+	<td>	
+		<!-- link to show author -->
+		<%=link_to h(reception.work.author.name), 
+			:controller =>"authors",
+			:action => "show",
+			:id => reception.work.author.id %>
+			&nbsp; - &nbsp; 
+		<!-- link to show work -->
+		<%=link_to h(reception.work.title), 
+			:controller =>"works",
+			:action => "show",
+			:id => reception.work.id %>
+	</td>
+</tr>

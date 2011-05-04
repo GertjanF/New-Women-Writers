@@ -1,0 +1,18 @@
+<!-- start _librarylist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "name" %>>
+        <%= sort_link_helper "libraries_list", "Library", "upper(name)" %>
+      </td>
+
+      <td <%= sort_td_class_helper "short_name" %>>
+        <%= sort_link_helper "libraries_list", "Short name", "upper(short_name)" %>
+      </td>
+
+      <td <%= sort_td_class_helper "countries.name" %>>
+        <%= sort_link_helper "libraries_list", "Country", "upper(countries.name)" %>
+      </td>
+
+	<%= render :partial => @libraries %>
+</table>
+<!-- end _librarylist.html.erb-->

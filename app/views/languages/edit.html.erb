@@ -1,0 +1,20 @@
+<h1>Edit language</h1>
+
+<div class="form">
+	<!-- # START:errors -->
+	<%= error_messages_for :language -%>
+	<!-- # END:errors -->
+
+	<fieldset>
+		<legend>Enter language details</legend>
+		<% form_for :language, :url => { 
+			:action => "update", 
+			:id=>@language.id, 
+			:author_id => params[:author_id]} do |form| %> 
+			
+			<%= render :partial => 'form', :object => form  %>
+				<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:action => 'show', id=>@language.id}, :title => "cancel changes"  %>
+		<% end %>
+	</fieldset>
+</div>

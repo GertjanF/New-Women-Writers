@@ -1,0 +1,97 @@
+<!-- # START:name -->
+<div>
+	<%= form.label :name %>:<br />
+	<%= form.text_field :name, :size => 50, :class => "name" %>
+	<input type="hidden" name="backtoauthor" value="0" />
+</div>
+
+<!-- # Pseudonym -->
+<div>
+	<%= form.label :pseudonyms %>:<br />
+	<%= one_to_many_helper(@author.pseudonyms, 'pseudonyms', 'pseudonym', 'author') %>
+</div>
+
+<!-- # Spouse -->
+<div>
+	<%= form.label :spouse_or_other_names %>:<br />
+	<%= form.text_field :spouse, :class => "other" %>
+</div>
+
+<!-- # START: gender -->
+<div>
+	<%= form.label :gender %>:<br />
+	<%= form.select :gender, :female=>'F', :unknown=>'U', :male=>'M' %>
+</div>
+
+<!-- # START: year of birth -->
+<div>
+	<%= form.label :year_born %>:<br />
+	<%= form.text_field :year_born, :size => 4, :class => "year" %>
+</div>
+
+<!-- # START: year of death -->
+<div>
+	<%= form.label :year_death %>:<br />
+	<%= form.text_field :year_death, :size => 4, :class => "year" %>
+</div>
+
+<!-- # Children -->
+<!-- div>
+	<%= form.label :children %>:<br />
+	<%= form.text_field :children, :size => 4, :class => "number" %>
+</div -->
+
+<!-- # Personal situation -->
+<div>
+	<%= form.label :about_her_personal_situation %>:<br />
+	<%= form.text_area :personal_situation, :rows => 4, :class => "text" %>
+</div>
+
+<div>
+	<%= form.label :country %>:<br />
+<div><%= @author.countries.collect { |t| t.name }.join(' - ') %></div>
+	<%= collection_select :author, :country_ids, Country.find(:all, :order => 'name ASC'), :id, :name, { :selected => @author.country_ids }, { :multiple => true, :name => 'author[country_ids][]', :size => 7 } -%>
+	<div class="small">(to select or deselect more than one, use [ctrl-click])</div>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a country" , "addSubTable('country', 'author')" %>
+</div>
+
+<div>
+	<%= form.label :languages %>:<br />
+<div><%= @author.languages.collect { |t| t.language }.join(' - ') %></div>
+	<%= collection_select :author, :language_ids, Language.find(:all, :order => 'language ASC'), :id, :language, { :selected => @author.language_ids }, { :multiple => true, :language => 'author[language_ids][]', :size => 7 } -%>
+	<div class="small">(to select or deselect more than one, use [ctrl-click])</div>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a language" , "addSubTable('language', 'author')" %>
+</div>
+
+<!-- # Relations -->
+<div>
+	<%= form.label :relations, "Relations to other authors" %>:<br />
+	<%= relation_edit_helper(@author) %> <%# in authors_helper %>
+</div>
+
+<!-- # Professional situation -->
+<div>
+	<%= form.label :about_her_professional_situation %>:<br />
+	<%= form.text_area :financial_situation, :rows => 4, :class => "text" %>
+</div>
+
+<!-- # Bibliography -->
+<div>
+	<%= form.label :elements_of_bibliography %>:<br />
+	<%= form.text_area :bibliography, :rows => 4, :class => "text" %>
+</div>
+
+<!-- # Notes -->
+<div>
+	<%= form.label :provisional_notes %>:<br />
+	<%= form.text_area :notes, :rows => 4, :class => "text" %>
+</div>
+
+<!-- # Author_url -->
+<div>
+	<%= form.label :author_urls, "Weblinks" %>:<br />
+	<%= one_to_many_link_helper(@author.author_urls, 'author_urls', 'title', 'url', 'author') %>
+</div>
+
+
+

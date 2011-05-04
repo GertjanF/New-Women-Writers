@@ -1,0 +1,6 @@
+<!-- _work_url.html.erb -->
+<tr>
+	<td><% unless work_url.work.nil? %><%= link_to h(work_url.work.title), work_path(:id => work_url.work.id) , :class=>"subwork" %><% end %></td>
+	<td><%= link_to h(work_url.title), work_url_path(:id => work_url.id) %></td>
+	<td><a href="<%=h(work_url.url)%>"><%=h(work_url.url)%></a> </td>
+</tr>

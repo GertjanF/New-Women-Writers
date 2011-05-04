@@ -1,0 +1,35 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Source:", :action => "index" %>
+ <%=h @source.short_name %>
+</h1>
+<div class="details">
+<table class="source details">
+<tr class="source details"><td class="source details">Name:</td><td class="source details"><%=h @source.short_name %></td></tr>
+<tr class="source details"><td class="source details">Full name:</td><td class="source details"><%=h @source.full_name %></td></tr>
+<tr class="source details"><td class="source details">Type:</td><td class="source details"><%=h @source.source_type %></td></tr>
+<tr class="source details"><td class="source details">Progress:</td><td class="crlfsafe details"><%=h @source.progress %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="source details"><td class="source details">Updated at:</td><td class="source details"><%=h @source.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@source, 'source') %>
+<% if admin? %>
+		<%= delete_button(@source, 'source') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+<h2>Receptions in this source</h2>
+<table>
+	<%= render :partial => "reception", :collection => @source.receptions, :receptions => @source.receptions.sort!{|a,b| a.title <=> b.title} %>
+	<%= no_records(@source.receptions) %>
+</table>
+	
+</div>

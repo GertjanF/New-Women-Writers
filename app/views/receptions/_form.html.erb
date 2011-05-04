@@ -1,0 +1,96 @@
+<!-- #Work author -->
+<div>
+	<%= form.label :author_of_work %>:<br />
+	<%= @work_author_name %>
+</div>
+
+<!-- #On work -->
+<div>
+	<% unless params[:work_id] .nil? %>
+		<%= form.label :work_title %>:<br />
+		<%= Work.find( params[:work_id] ).title %>
+		<%=  hidden_field_tag 'reception[work_id]', params[:work_id] %>
+	<% else %>
+		<%= form.label :received_work %>:<br />
+		<%= form.collection_select( :work_id, Work.find(:all, :order => :title), :id, :short_title,{:include_blank => true},{:class=>'wideselect'}) %>
+	<% end %>
+	<input type="hidden" name="backtoreception" value="0" />
+</div>
+
+<!-- #Reception author -->
+<div>
+	<% unless params[:author_id] .nil? %>
+		<%= form.label :author_of_reception %>:<br />
+		<b><%= Author.find( params[:author_id] ).name %></b>
+		<%=  hidden_field_tag 'reception[author_id]', params[:author_id] %>
+	<% else %>
+		<%= form.label :author_of_reception %>:<br />
+		<%= form.collection_select( :author_id, Author.find(:all, :order => :name), :id, :name,{:include_blank => true},{:class=>'wideselect'}) %>
+	<% end %>
+</div>
+
+<!-- # Reception Title -->
+<div>
+	<%= form.label :title %>:<br />
+	<%= form.text_field :title, :size => 100, :class => "name" %>
+</div>
+
+<!-- #Medium -->
+<div>
+	<%= form.label :reception_type %>:<br />
+	<%= form.collection_select( :medium_id, Medium.find(:all, :order => :medium), :id, :medium,{:include_blank => true},{:class=>'wideselect'}) %>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a reception type" , "addSubTable('medium', 'reception')" %>
+</div>
+
+<!-- #Country-->
+<div>
+	<%= form.label :country %>:<br />
+	<%= form.collection_select( :country_id, Country.find(:all, :order => :name), :id, :name,{:include_blank => true},{:class=>'wideselect'}) %>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a country" , "addSubTable('country', 'reception')" %>
+</div>
+
+<!-- # Languages -->
+<div>
+	<%= form.label :language_used %>:<br />
+	<%= form.collection_select( :language_id, Language.find(:all, :order => :language), :id, :language,{:include_blank => true},{:class=>'wideselect'}) %>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a language" , "addSubTable('language', 'reception')" %>
+</div>
+<!-- # Year  -->
+<div>
+	<%= form.label :year %>:<br />
+	<%= form.text_field :year , :size => 4, :class => "year" %>
+</div>
+
+<!-- #Source -->
+<div>
+	<%= form.label :source %>:<br />
+	<%= form.collection_select( :source_id, Source.find(:all, :order => :short_name), :id, :short_name,{:include_blank => true},{:class=>'wideselect'}) %>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a source" , "addSubTable('source', 'reception')" %>
+</div>
+
+<!-- #Library -->
+<div>
+	<%= form.label :libraries %>:<br />
+<div><%= @reception.libraries.collect { |t| t.name }.join(' - ') %></div>
+    <%= collection_select :reception, :library_ids, Library.find(:all, :order => 'name ASC'), :id, :name, { :selected => @reception.library_ids }, { :multiple => true, :name => 'reception[library_ids][]', :size => 5 } -%>
+    <div class="small">(to select or deselect more than one use [ctrl-click])</div>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a library" , "addSubTable('library', 'reception')" %>
+</div>
+
+<!-- # References  -->
+<div>
+	<%= form.label :references %>:<br />
+	<%= form.text_area :references, :rows => 4, :class => "text" %>
+</div>
+
+<!-- # Excerpt  -->
+<div>
+	<%= form.label :provisional_notes %>:<br />
+	<%= form.text_area :excerpt, :rows => 4, :class => "text" %>
+</div>
+
+<!-- # Reception_url -->
+<div>
+	<%= form.label :reception_urls, "Relevant weblinks" %>:<br />
+	<%= one_to_many_link_helper(@reception.reception_urls, 'reception_urls', 'title', 'url', 'reception') %>
+</div>

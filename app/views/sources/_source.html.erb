@@ -1,0 +1,7 @@
+<!-- _source.html.erb -->
+<tr>
+	<td><%= link_to h(source.full_name), source_path(:id => source.id) %></td>
+	<td><%= link_to h(source.short_name), source_path(:id => source.id) %></td>
+	<td><%= link_to h(source.source_type), source_path(:id => source.id) %></td>
+	<td><%= link_to h(source.progress), source_path(:id => source.id) %></td>
+</tr>

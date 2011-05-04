@@ -1,0 +1,23 @@
+<!-- _reception.html.erb -->
+<tr>
+
+	<td class="line_number"><%= @numbered_list %></td>
+	<td class="image_align_top">
+		<%= link_to image_tag("xreception.png", :border=>0, :title => "view this reception"), {:controller => "receptions", :action => 'show', :id => reception.id}  %>
+	</td>
+	<td><% unless reception.work.nil? %>
+		<%= reception.work.author.name %></td><td>
+		<%= reception.work.title %></td><td>
+		<%= reception.work.publish_year %>
+	<% end %></td>
+	<td><% unless reception.author.nil? %>
+		<%= reception.author.name %></td><td>
+		<%= reception.author.gender %>
+	<% end %></td>
+	<td><% unless reception.medium.nil? %>
+		<%= reception.medium.medium %>
+	<% end %></td>
+	<td><%= reception.year %></td>
+	<td><%= reception.country.name %></td>
+	</td>
+</tr>

@@ -1,0 +1,15 @@
+<tr>
+	<td  class="sub reception" id="reception_<%=h reception.id %>" >
+	<% if editor? %>	
+		<!-- delete and edit buttons -->
+		<!--%= link_to image_tag("xdelete.png", :border=>0, :title => "delete this reception), {:controller => "receptions", :action => 'destroy', :source_id => reception.source.id, :id => reception.id}, :confirm => "This will delete this reception. \n\nAre you sure?", :method => :delete  %-->
+		<%= link_to image_tag("xedit.png", :border=>0, :title => "edit this reception"), {:controller => "receptions", :action => 'edit',  :id => reception.id}  %>
+	<% end %>
+
+		<!-- link to show reception via title -->
+		<%=link_to h(reception.title), 
+			:controller =>"receptions",
+			:action => "show",
+			:id => reception.id %> 
+	</td>
+</tr>

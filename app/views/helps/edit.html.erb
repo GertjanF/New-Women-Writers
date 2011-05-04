@@ -1,0 +1,22 @@
+<h1>Edit the help page for: <%= @help_page.object_controller %>, <%= @help_page.object_action %> </h1>
+
+<div class="form">
+<!-- # START:errors -->
+	<%= error_messages_for :help -%>
+<!-- # END:errors -->
+
+  <fieldset>
+  <legend>Edit help text</legend>
+	<% form_for :help, :url => { :action => "update", :id=>@help_page.id} do |form| %>
+
+<div>
+	<%= form.label :text %>:<br />
+	<%= form.text_area :help_text, :rows => 4, :class => "text", :value => @help_page.help_text %>
+</div>
+
+<%= image_submit_tag("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+<%= link_to image_tag("cancel.png", :border=>0), {:action => 'show', :id => @help_page.id}, :title => "cancel changes"  %>
+
+  <% end %>
+  </fieldset>
+</div>

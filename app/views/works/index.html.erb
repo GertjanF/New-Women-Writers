@@ -1,0 +1,102 @@
+<span class="toright">
+	<%= link_to_function image_tag("help.png", :border => 0), "helpbox('works', 'index')", {:title => 'Show/hide the help page'} %>
+	<%= link_to_function  image_tag("xsearch.png", :border=>0), "searchbox('works')", {:title => 'Toggle searchbox on or off'} %>
+</span>
+
+<h1>Works</h1>
+
+<div class="details crlfsafe" id="help"><%= @help_page.help_text %></div>
+
+<div class="form" id="searchbox">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+	<fieldset>
+		<p>
+		<table>
+		<input type="hidden" name="fromworksearch" value="1" />
+		<%= hidden_field_tag('sort', params[:sort]) %>
+		<%= hidden_field_tag('page', params[:page]) %>
+		<%= hidden_field_tag("searchtoggle", params[:searchtoggle]) %>
+		<div class="small">Your search results can be found at the end of the search form. You can hide the search fields by clicking the green button at the top right corner.</div>	
+		
+		<tr><td><h4>Author of work:</h4></td></tr>
+		
+			<tr><td>Author:</td><td><%= text_field_tag (:workauthor, params[:workauthor])  %>&nbsp;&nbsp;
+				<%=hidden_field_tag 'pseudonymflag', '0' %><%= check_box_tag 'pseudonymflag', '1', params[:pseudonymflag]!='0' %>
+				search in pseudonyms
+			</td></tr>
+			
+			<tr><td>Country of author: </td>
+			<td><%= collection_select :work, :authorcountry_ids, Country.find(:all, :order => 'name ASC'), :id, :name, { :selected => (params[:authorcountry_ids].collect{|x| x.to_i} unless params[:authorcountry_ids].blank?) }, { :multiple => true, :name => 'authorcountry_ids[]', :size => 7 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+			<tr><td><h4>Works:</h4></td></tr>
+			
+			<tr><td>Words in the title:</td><td><%= text_field_tag :worktitle, params[:worktitle] %></td></tr>
+			
+			<tr><td>Country of first publication: </td>
+			<td><%= collection_select :work, :country_ids, Country.find(:all, :order => 'name ASC'), :id, :name, { :selected => (params[:country_ids].collect{|x| x.to_i} unless params[:country_ids].blank?) }, { :multiple => true, :name => 'country_ids[]', :size => 7 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+			<tr><td>Language: </td>
+			<td><%= collection_select :work, :language_ids, Language.find(:all, :order => 'language ASC'), :id, :language, { :selected => (params[:language_ids].collect{|x| x.to_i} unless params[:language_ids].blank?) }, { :multiple => true, :name => 'language_ids[]', :size => 4 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+			<tr><td>Year of publication:</td><td><%= text_field_tag :workyear, params[:workyear] %></td></tr>
+			
+			<tr><td>Genre: </td>
+			<td><%= collection_select :work, :genre_ids, Genre.find(:all, :order => 'genre ASC'), :id, :genre, { :selected => (params[:genre_ids].collect{|x| x.to_i} unless params[:genre_ids].blank?) }, { :multiple => true, :name => 'genre_ids[]', :size => 7 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+			<tr><td>Topos like:</td><td><%= text_field_tag :worktopos, params[:worktopos] %> </td></tr>
+			
+			<tr><td>Library: </td>
+			<td><%= collection_select :work, :library_ids, Library.find(:all, :order => 'name ASC'), :id, :name, { :selected => (params[:library_ids].collect{|x| x.to_i} unless params[:library_ids].blank?) }, { :multiple => true, :name => 'library_ids[]', :size => 4 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+	<% if logged_in? %>
+	
+		<tr><td>Provisional notes:</td><td><%= text_field_tag :notes, params[:notes]  %></td></tr>
+	
+	<% end %>
+			
+			<tr><td>Records per page:</td><td><%= text_field_tag :per_page, params[:per_page]  %><div class="small">Not more than 500 records per page</div></td></tr>
+		
+		</table>
+		</p>
+		<%= image_submit_tag("search.png", :title=>"search") %>
+		<%= link_to image_tag("reload.png", :border=>0), :action => 'reset_search'  %>
+	</fieldset>
+	</form>
+
+<!--%= navigation @works, "title of work" %-->
+
+</form>
+</div>
+
+<span class="toright">
+<% if logged_in? %>
+<%= link_to image_tag("excel.png", :border => 0, :title => "Download as a spreadsheet"), :action => "excel", :sort => params[:sort] %>
+<% end %>
+</span>
+
+<a name='results'>
+<div class="recsfound"><%= "Found #{@count} records" %></div>
+</a>
+
+<%= will_paginate @works %>
+
+<% if editor? %>
+	<!-- Add work button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_work_path, :title => "add new work" %>
+<% end %>
+
+	<%= no_records(@works) %>
+	
+	<div class="works_list" id="works_list">
+		<%= render :partial => "worklist" unless @works.empty? %>
+	</div>
+	<%= will_paginate @works %>
+	

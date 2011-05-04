@@ -1,0 +1,27 @@
+	<table>
+		<tr>
+		<td></td>
+		  <td></td>
+		  <b><td>Name</td>
+		  <td>Year born</td>
+		  <td>Year of death</td>
+		  <td>Country</td>
+		  <td>Language</td><b>
+		</tr>
+		
+	<% @numbered_list = 0 %>
+	<% @author_ids.each do |author_id| %>
+		<% @numbered_list += 1 %>
+		<% @author = Author.find(author_id) %>
+			<tr>
+				<td class="line_number"><%= @numbered_list %></td>
+				<td class="readerflag" title="this author has no works in this database"><% if @author.reader? %><%= CGI::unescapeHTML("&reg;") %>&nbsp;<% end %></td>
+				<td><%= @author.name %></td>
+				<td><%= @author.year_born %></td>
+				<td><%= @author.year_death %></td>
+				<td><% for country in @author.countries %><%= country.name + "<br />"%><% end %></td>
+				<td><% for language in @author.languages %><%= language.language + "<br />"%><% end %></td>
+			</tr>
+	<% end %>
+
+	</table>

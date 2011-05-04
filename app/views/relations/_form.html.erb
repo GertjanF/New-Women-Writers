@@ -1,0 +1,21 @@
+<!-- #Author -->
+<div>
+	<% unless params[:author_id] .nil? %>
+		Author:<br /><b><%= Author.find( params[:author_id] ).name %></b>
+		<%=  hidden_field_tag 'relation[author_id]', params[:author_id] %>
+	<% else %>
+		<%= form.label :author %>:<br />
+		<%= form.collection_select( :author_id, Author.find(:all, :order => :name), :id, :name, :prompt => true) %>
+	<% end %>
+</div>
+
+<div>
+	<%= form.label :relation_type %>:<br />
+	<%= form.collection_select( :realtion_type_id, Relation_type.all), :id, :descript, :prompt => true) %>
+</div>
+
+<div>
+	<%= form.label :author %>:<br />
+	<%= form.collection_select( :relative_id, Author.find(:all, :order => :name), :id, :name, :prompt => true) %>
+</div>
+

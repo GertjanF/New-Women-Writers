@@ -1,0 +1,33 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Genre:", :action => "index" %>
+ <%=h @genre.genre %>
+</h1>
+<div class="details">
+<table class="genre details">
+<tr class="genre details"><td class="genre details">Genre:</td><td class="genre details"><%=h @genre.genre %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="genre details"><td class="genre details">Updated at:</td><td class="genre details"><%=h @genre.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+<div>
+	<%= edit_button(@genre, 'genre') %>
+<% if admin? %>
+		<%= delete_button(@genre, 'genre') %>
+<% end %>
+</div>
+
+</p>
+<% end %>
+
+<h2>Works representing this genre</h2>
+<table>
+	<%= render :partial => "work", :collection => @genre.works, :works => @genre.works.sort!{|a,b| a.title <=> b.title} %>
+	<%= no_records(@genre.works) %>
+</table>
+	
+</div>

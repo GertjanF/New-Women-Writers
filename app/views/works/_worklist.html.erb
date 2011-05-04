@@ -1,0 +1,28 @@
+<!-- start _worklist.html.erb-->
+<table>
+    <tr>
+	<td></td>
+      <td <%= sort_td_class_helper "authors.name" %>>
+        <%= sort_link_helper "works_list", "Author", "upper(authors.name)" %>
+      </td>
+      <td <%= sort_td_class_helper "title" %>>
+        <%= sort_link_helper "works_list", "Title", "upper(title)" %>
+      </td>
+      <td <%= sort_td_class_helper "publish_year" %>>
+        <%= sort_link_helper "works_list", "Year", "publish_year" %>
+      </td>
+	  <td <%= sort_td_class_helper "countries.name" %>>
+		<%= sort_link_helper "works_list", "Country", "upper(countries.name)" %>
+	  </td>
+      <td <%= sort_td_class_helper "genres.genre" %>>
+        <%= sort_link_helper "works_list", "Genre", "upper(genres.genre)" %>
+      </td>
+    </tr>
+
+	<% @numbered_list = 0 %>
+	<% @works.each do |work| %>
+	<% @numbered_list += 1 %>
+	<%= render :partial => work %>
+	<% end %>
+</table>
+<!-- end _worklist.html.erb-->

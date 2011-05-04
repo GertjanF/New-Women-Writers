@@ -1,0 +1,12 @@
+<!-- # Author -->
+<div>
+	<%= form.label :author %>:<br />
+	<%= form.collection_select( :author_id, Author.find(:all, :order => :name), :id, :name,{:prompt => true},{:class=>'wideselect'}) %>
+</div>
+
+<!-- # Pseudonym -->
+<div>
+	<%= form.label :pseudonym %>:<br />
+	<%= form.text_field :pseudonym, :class => "group" %>
+</div>
+

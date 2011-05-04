@@ -1,0 +1,17 @@
+<tr>
+	<td  class="sub library" id="library_<%=h library.id %>" >
+	<% if editor? %>	
+		<!-- delete and edit buttons -->
+		<!--%= link_to image_tag("xdelete.png", :border=>0, :title => "delete this library"), {:controller => "libraries", :action => 'destroy', :country_id => library.country.id, :id => library.id}, :confirm => "This will delete this library. \n\nAre you sure?", :method => :delete  %-->
+		<%= link_to image_tag("xedit.png", :border=>0, :title => "edit this library"), {:controller => "libraries", :action => 'edit', :id => library.id}  %>
+	<% end %>
+		
+		<!-- link to show library via name -->
+		<%=link_to library.name, 
+			:controller =>"libraries",
+			:action => "show",
+			:id => library.id %>
+			
+
+	</td>
+</tr>

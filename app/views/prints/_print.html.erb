@@ -1,0 +1,8 @@
+<!-- _print.html.erb -->
+<tr>
+	<td><% unless print.work.nil? %><%= link_to h(print.work.title), work_path(:id => print.work.id) , :class=>"subwork" %><% end %></td>
+	<td><%= link_to h(print.year), print_path(:id => print.id) %></td>
+	<td><%= link_to h(print.publisher), print_path(:id => print.id) %></td>
+	<td><%= link_to h(print.location), print_path(:id => print.id) %></td>
+	<td><%= link_to h(print.edition), print_path(:id => print.id) %></td>
+</tr>

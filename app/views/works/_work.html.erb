@@ -1,0 +1,9 @@
+<!-- _work.html.erb -->
+<tr>
+	<td class="line_number"><%= @numbered_list %></td>
+	<td><% unless work.author.nil? %><%= link_to h(work.author.name), author_path(:id => work.author.id) , {:class=>"subauthor"} %><% end %></td>
+	<td><%= link_to h(cut_at(work.title, 50)), work_path(:id => work.id), :title => work.title %></td>
+	<td><%= work.publish_year %></td>
+	<td><% unless work.country.nil? %><%= work.country.name %><% end %></td>
+	<td><% for genre in work.genres %><%= genre.genre + "<br />"%><% end %></td>
+</tr>

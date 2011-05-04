@@ -1,0 +1,20 @@
+<!-- start _changelist.html.erb-->
+<div class="small">(By clicking on the text, you will see the changed record)</div>
+	<table>
+		<tr>
+      <td <%= sort_td_class_helper "object_name" %>>
+        <%= sort_link_helper "changes_list", "Change made", "upper(changes.object_name)" %>
+      </td>
+      <td <%= sort_td_class_helper "created_at" %>>
+        <%= sort_link_helper "changes_list", "Timestamp", "changes.created_at" %>
+      </td>
+	  <td <%= sort_td_class_helper "approved" %>>
+        <%= sort_link_helper "changes_list", "Approval", "changes.approved" %>
+      </td>
+		</tr>
+		
+
+	<%= render :partial => "userchange", :collection => @changes, :as => :change %>
+
+	</table>
+<!-- end _authorlist.html.erb-->

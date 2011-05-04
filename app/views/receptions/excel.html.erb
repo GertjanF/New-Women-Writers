@@ -1,0 +1,28 @@
+<table>
+    <tr>
+	<td></td>
+	<b><td>Author of work</td>
+	<td>Work</td>
+	<td>Publish year</td>
+	<td>Receiver</td>
+	<td>Gender</td>
+	<td>Reception type</td>
+	<td>Year</td></b>
+    </tr>
+
+	<% @numbered_list = 0 %>
+	<% @reception_ids.each do |reception_id| %>
+		<% @numbered_list += 1 %>
+		<% @reception = Reception.find(reception_id) %>
+			<tr>
+				<td class="line_number"><%= @numbered_list %></td>
+				<td><%= @reception.work.author.name %></td>
+				<td><%= @reception.work.title %></td>
+				<td><%= @reception.work.publish_year %></td>
+				<td><%= @reception.author.name %></td>
+				<td><%= @reception.author.gender %></td>
+				<td><%= @reception.medium.medium %></td>
+				<td><%= @reception.year %></td>
+			</tr>
+	<% end %>
+</table>

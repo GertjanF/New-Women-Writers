@@ -1,0 +1,103 @@
+/**
+ * Copyright 2009 Huygens Instituut for the History of the Netherlands, Den Haag, The Netherlands.
+ *
+ * This file is part of New Women Writers.
+ *
+ * New Women Writers is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * New Women Writers is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with New Women Writers.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#menu {
+	width: 95%;
+	background: #F8F5EE;
+	border-bottom: 0px #D0DADB solid;
+	padding-left: 10px;
+	height: 33px;
+}
+
+#menu  ul {
+	display: block;
+	margin: 0;
+	padding: 0;
+	line-height: 1em;
+	list-style: none;
+	z-index: 90
+}
+
+#menu  ul li {
+	float: left;
+	margin: 0 3px 0 0;
+	padding: 0;
+	font-size: 12px;
+	line-height: 1, 5em;
+	list-style-type: none;
+}
+
+#menu ul li a {
+	float: left;
+	display: block;
+	width: auto;
+	font-weight: normal;
+	background: transparent;
+	text-decoration: none;
+	color: #B36B00;
+	margin: 0;
+	padding: 0.9em 0.8em 0.5em 1em;
+}
+
+#menu  ul li a:hover {
+	color: #fff;
+	background-color: #B36B00;
+	text-decoration: none;
+}
+
+#menu  ul li.sep {
+	color: #B36B00;
+	padding: 0.8em 0em 0.5em 0em;
+}
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#menu  ul li a {
+	float: none;
+}
+
+/* End IE5-Mac hack */
+#menu  ul.level2, #menu ul.level3 {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	visibility: hidden;
+	border-left: 1px solid #fff;
+	border-top: 1px solid #fff;
+	border-right: 1px solid #fff;
+	background: #F8F5EE;
+	text-align: left;
+}
+
+#menu  ul.level2 li, #menu ul.level3 li {
+	border-bottom: 1px solid #fff;
+	float: none;
+	margin: 0;
+	padding: 0;
+	width: 150px;
+}
+
+#menu  ul.level2 li a, #menu ul.level3 li a {
+	padding: 5px 9px 5px 5px;
+}
+
+#menu  ul.level2 li a:hover,#menu  ul.level3 li a:hover {
+	font-weight: normal;
+	background-color: #B36B00;
+	background-image: none;
+}

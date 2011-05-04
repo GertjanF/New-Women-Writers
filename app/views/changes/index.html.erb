@@ -1,0 +1,24 @@
+<h1>Changes</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @changes, "user name" %>
+
+</form>
+</div>
+
+	<%= will_paginate @changes %>
+
+	<%= no_records(@changes) %>
+
+	<div class="changes_list" id="changes_list">
+		<%= render :partial => "changelist" unless @changes.empty? %>
+	</div>
+	<div class="changes_list" id="changes_list">
+	<%= will_paginate @changes %>
+	</div>
+	

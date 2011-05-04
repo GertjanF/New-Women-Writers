@@ -1,0 +1,10 @@
+<!-- start _userlist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "name" %>>
+        <%= sort_link_helper "users_list", "User", "upper(name)" %>
+      </td>
+	  
+	<%= render :partial => @users %>
+</table>
+<!-- end _userlist.html.erb-->

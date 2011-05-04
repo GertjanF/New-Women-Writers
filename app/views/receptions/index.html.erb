@@ -1,0 +1,103 @@
+<span class="toright">
+	<%= link_to_function image_tag("help.png", :border => 0), "helpbox('receptions', 'index')", {:title => 'Show/hide the help page'} %>
+	<%= link_to_function  image_tag("xsearch.png", :border=>0), "searchbox('receptions')", {:title => 'Toggle searchbox on or off'} %>
+</span>
+
+<h1>Receptions</h1>
+
+<div class="details crlfsafe" id="help"><%= @help_page.help_text %></div>
+
+<div class="form" id="searchbox">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+	<fieldset>
+		<table>
+			<input type="hidden" name="fromreceptionsearch" value="1" />
+			<%= hidden_field_tag('sort', params[:sort]) %>
+			<%= hidden_field_tag('page', params[:page]) %>
+			<%= hidden_field_tag("searchtoggle", params[:searchtoggle]) %>
+			<div class="small">Your search results can be found at the end of the search form. You can hide the search fields by clicking the green button at the top right corner.</div>	
+		
+		<tr><td><h4>Received work:</h4></td></tr>
+		
+			<tr><td>Author of work:</td><td><%= text_field_tag(:workauthor, params[:workauthor])  %>
+			
+			<tr><td>Word(s) in title:</td><td><%= text_field_tag :worktitle, params[:worktitle] %></td></tr>
+			
+			<td>Country of first publishment: </td>
+			<td><%= collection_select :reception, :workcountry_ids, Country.find(:all, :order => 'name ASC'), :id, :name, { :selected => (params[:workcountry_ids].collect{|x| x.to_i} unless params[:workcountry_ids].blank?) }, { :multiple => true, :name => 'workcountry_ids[]', :size => 3 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+		
+		<tr><td><h4>Receptions:</h4></td></tr>
+		
+			<tr><td>Author of reception:</td><td><%= text_field_tag(:receptionauthor, params[:receptionauthor])  %></td></tr>
+
+			<tr><td>Gender of this author:</td>
+				<td><%= radio_button_tag 'gender', "", params[:gender]=='' %> All
+						<%= radio_button_tag 'gender', "F",  params[:gender]=='F' %> Female 
+						<%= radio_button_tag 'gender', "M",  params[:gender]=='M' %> Male
+						<%= radio_button_tag 'gender', "U",  params[:gender]=='U' %> Unknown
+				</td>
+			</tr>
+			
+			<tr><td>Words in title of reception document:</td><td><%= text_field_tag :receptiontitle, params[:receptiontitle] %></td></tr>
+			
+			<tr><td>Reception type:</td>
+			<td><%= collection_select :reception, :medium_ids, Medium.find(:all, :order => 'medium ASC'), :id, :medium, { :selected => (params[:medium_ids].collect{|x| x.to_i} unless params[:medium_ids].blank?) }, { :multiple => true, :name => 'medium_ids[]', :size => 3 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+
+			<tr><td>Written / published in year:</td><td><%= text_field_tag :receptionyear, params[:receptionyear] %></td></tr>
+			
+			<tr><td>Receiving country: </td>
+			<td><%= collection_select :reception, :country_ids, Country.find(:all, :order => 'name ASC'), :id, :name, { :selected => (params[:country_ids].collect{|x| x.to_i} unless params[:country_ids].blank?) }, { :multiple => true, :name => 'country_ids[]', :size => 3 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+			<tr><td>Language: </td>
+			<td><%= collection_select :reception, :language_ids, Language.find(:all, :order => 'language ASC'), :id, :language, { :selected => (params[:language_ids].collect{|x| x.to_i} unless params[:language_ids].blank?) }, { :multiple => true, :name => 'language_ids[]', :size => 4 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+			<tr><td>Source: </td>
+			<td><%= collection_select :reception, :source_ids, Source.find(:all, :order => 'short_name ASC'), :id, :short_name, { :selected => (params[:source_ids].collect{|x| x.to_i} unless params[:source_ids].blank?) }, { :multiple => true, :name => 'source_ids[]', :size => 3 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+			<tr><td>References:</td><td><%= text_field_tag :references, params[:references] %></td></tr>
+			
+			<tr><td>Library: </td>
+			<td><%= collection_select :reception, :library_ids, Library.find(:all, :order => 'name ASC'), :id, :name, { :selected => (params[:library_ids].collect{|x| x.to_i} unless params[:library_ids].blank?) }, { :multiple => true, :name => 'library_ids[]', :size => 4 } -%>
+			<div class="small">(to select or deselect more than one use [ctrl-click])</div></td></tr>
+			
+	<% if logged_in? %>
+	
+		<tr><td>Provisional notes:</td><td><%= text_field_tag :notes, params[:notes]  %></td></tr>
+	
+	<% end %>
+			
+			<tr><td>Records per page:</td><td><%= text_field_tag :per_page, params[:per_page]  %><div class="small">Not more than 500 records per page</div></td></tr>
+
+			</table>
+		<%= image_submit_tag("search.png", :title=>"search") %>
+		<%= link_to image_tag("reload.png", :border=>0),  :action => 'reset_search'  %>
+	</fieldset>
+	</form>
+</div>	
+
+<span class="toright">
+<% if logged_in? %>
+<%= link_to image_tag("excel.png", :border => 0, :title => "Download as a spreadsheet"), :action => "excel", :sort => params[:sort] %>
+<% end %>
+</span>
+
+<a name="results">
+<div class="recsfound"><%= "Found #{@count} records" %></div>
+</a>
+
+<%= will_paginate @receptions %>
+
+	<%= no_records(@receptions) %>
+
+	<div class="receptions_list" id="receptions_list">
+		<%= render :partial => "receptionlist" unless @receptions.empty? %>
+	</div>
+	 <%= will_paginate @receptions %>

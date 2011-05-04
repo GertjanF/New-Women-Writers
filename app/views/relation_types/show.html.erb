@@ -1,0 +1,26 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Relation type", :action => "index" %>
+</h1>
+<div class="details">
+<table class="relation_type details">
+<tr class="relation_type details"><td class="relation_type details">Parent:</td><td class="relation_type details"><%=h @relation_type.parent_female %>/<%=h @relation_type.parent_male %></td></tr>
+<tr class="relation_type details"><td class="relation_type details">Child:</td><td class="relation_type details"><%=h @relation_type.child_female %>/<%=h @relation_type.child_male %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="relation_type details"><td class="relation_type details">Updated at:</td><td class="relation_type details"><%=h @relation_type.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@relation_type, 'relation type') %>
+<% if admin? %>
+		<%= delete_button(@relation_type, 'relation type') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+</div>

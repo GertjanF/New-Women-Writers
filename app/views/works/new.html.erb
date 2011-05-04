@@ -1,0 +1,27 @@
+<span class="toright">
+	<%= link_to_function image_tag("help.png", :border => 0), "helpbox('works', 'form')", {:title => 'Show/hide the help page'} %>
+</span>
+
+<h1>Create a record for a new work</h1>
+
+<div class="details crlfsafe" id="help"><%= @help_page.help_text %></div>
+
+<div class="form">
+	<!-- # START:errors -->
+		<%= error_messages_for :work -%>
+	<!-- # END:errors -->
+
+	<fieldset>
+		<legend>Enter work details</legend>
+		<% form_for :work, :url => { :action => "create" ,
+														:author_id => params[:author_id]} do |form| %> 
+														
+			<%= render :partial => 'form', :object => form  %>
+			<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+			<%= link_to image_tag("cancel.png", :border=>0), {:action => 'index'}, :title => "cancel changes"  %>
+
+			<!--%= submit_tag "Create", :class => "submit" %-->
+			<!--%= link_to "cancel", { :action => "index" }, :class => "cancel" %-->
+		<% end %>
+	</fieldset>
+</div>

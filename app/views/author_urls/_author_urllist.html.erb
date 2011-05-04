@@ -1,0 +1,17 @@
+<!-- start _author_urllist.html.erb-->
+<table>
+    <tr>
+	  <td <%= sort_td_class_helper "authors.name" %>>
+        <%= sort_link_helper "author_urls_list", "Author", "upper(authors.name)" %>
+      </td>
+      <td <%= sort_td_class_helper "title" %>>
+        <%= sort_link_helper "author_urls_list", "Link title", "upper(title)" %>
+      </td>
+	  <td <%= sort_td_class_helper "url" %>>
+        <%= sort_link_helper "author_urls_list", "Link url", "upper(url)" %>
+      </td>
+    </tr>
+
+	<%= render :partial => @author_urls %>
+</table>
+<!-- end _author_urllist.html.erb-->

@@ -1,0 +1,6 @@
+<!-- _reception_url.html.erb -->
+<tr>
+	<td><% unless reception_url.reception.nil? %><%= link_to h(reception_url.reception.title), reception_path(:id => reception_url.reception.id) , :class=>"subreception" %><% end %></td>
+	<td><%= link_to h(reception_url.title), reception_url_path(:id => reception_url.id) %></td>
+	<td><a href="<%=h(reception_url.url)%>"><%=h(reception_url.url)%></a> </td>
+</tr>

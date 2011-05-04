@@ -1,0 +1,24 @@
+<table>
+    <tr>
+	<td></td>
+	<b><td>Author</td>
+	<td>Title</td>
+	<td>Year</td>
+	<td>Country</td>
+	<td>Genre</td></b>
+    </tr>
+
+	<% @numbered_list = 0 %>
+	<% @work_ids.each do |work_id| %>
+		<% @numbered_list += 1 %>
+		<% @work = Work.find(work_id) %>
+			<tr>
+			<td class="line_number"><%= @numbered_list %></td>
+			<td><%= @work.author.name %></td>
+			<td><%= @work.title %></td>
+			<td><%= @work.publish_year %></td>
+			<td><% unless @work.country.nil? %><%= @work.country.name %><% end %></td>
+			<td><% for genre in @work.genres %><%= genre.genre + "<br />"%><% end %></td>
+			</tr>
+	<% end %>
+</table>

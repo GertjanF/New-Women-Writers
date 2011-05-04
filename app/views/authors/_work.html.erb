@@ -1,0 +1,17 @@
+<tr>
+	<td  class="sub work" id="work_<%=h work.id %>">
+	<% @numbered_work_list += 1 %>
+	<%= image_tag "lijnplaatjes/e.gif", :border=>0, :class => 'image_align_middle' %>
+	</td>
+		
+	<td class="line_number"><%= @numbered_work_list %></td>
+		
+	<td  class="sub work" id="work_<%=h work.id %>">
+		<!-- link to edit work via title -->
+		<%=link_to h(work.title), 
+			:controller =>"works",
+			:action => "show",
+			:id => work.id %>
+			<span class="publishyear">(<%=h work.publish_year %>)</span>
+	</td>
+</tr>

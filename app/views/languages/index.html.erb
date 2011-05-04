@@ -1,0 +1,26 @@
+<h1>Languages</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @languages, "language" %>
+
+</form>
+</div>
+
+<%= will_paginate @languages %>
+
+<% if editor? %>
+	<!-- Add author button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_language_path, :title => "add new language" %>
+<% end %>
+
+	<%= no_records(@languages) %>
+
+	<div class="languages_list" id="languages_list">
+		<%= render :partial => "languagelist" unless @languages.empty? %>
+	</div>
+	 <%= will_paginate @languages %>

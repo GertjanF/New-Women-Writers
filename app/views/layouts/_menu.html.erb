@@ -1,0 +1,52 @@
+	<div id="menu">
+		<ul class="level1" id="root">
+			<li>
+				<a href="/authors">Authors</a>
+			</li>
+			<li class="sep">|</li>
+			<li>
+				<a href="/works">Works</a>
+			</li>
+			<li class="sep">|</li>
+			<li>
+				<a href="/receptions">Receptions</a>
+			</li>
+			<li class="sep">|</li>
+			<li>
+				<a href="#">Reports</a>
+				<ul class="level2">
+					<li><a href="/treeviews/show/7">Predecessors and followers</a></li>
+				</ul>
+			</li>
+			<% if logged_in? %>
+			<li class="sep">|</li>
+			<li>
+				<a href="#">Others</a>
+				<ul class="level2">
+					<li><a href="/changes">Changes</a></li>
+					<li><a href="/countries">Countries</a></li>
+					<li><a href="/genres">Genres</a></li>
+					<li><a href="/languages">Languages</a></li>
+					<li><a href="/libraries">Libraries</a></li>
+					<li><a href="/prints">Prints</a></li>
+					<li><a href="/pseudonyms">Pseudonyms</a></li>
+					<li><a href="/relation_types">Relation types</a></li>
+					<li><a href="/media">Reception types</a></li>
+					<li><a href="/sources">Sources</a></li>
+					<li><a href="/topois">Topoi</a></li>
+					<li><a href="/users">Users</a></li>
+					<li><a href="/author_urls">Weblinks authors</a></li>
+					<li><a href="/reception_urls">Weblinks receptions</a></li>
+					<li><a href="/work_urls">Weblinks works</a></li>
+					<% if admin? %><li><a href="/helps">Help pages</a></li><% end %>
+				</ul>
+			</li>
+			<% end %>
+			<li class="sep">|</li>
+			<li>
+				<%= link_to_function "Help", "helpbox('homepage', 'index')", {:title => 'Show/hide the help page'} %>
+			</li>
+		</ul>
+					
+			
+	</div>

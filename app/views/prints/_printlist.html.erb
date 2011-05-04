@@ -1,0 +1,22 @@
+<!-- start _printlist.html.erb-->
+<table>
+    <tr>
+	  <td <%= sort_td_class_helper "works.title" %>>
+		<%= sort_link_helper "prints_list", "Work", "upper(works.title)" %>
+	  </td>
+      <td <%= sort_td_class_helper "year" %>>
+        <%= sort_link_helper "prints_list", "Year", "year" %>
+      </td>
+      <td <%= sort_td_class_helper "publisher" %>>
+        <%= sort_link_helper "prints_list", "Publisher", "upper(publisher)" %>
+      </td>
+      <td <%= sort_td_class_helper "location" %>>
+        <%= sort_link_helper "prints_list", "Location", "upper(location)" %>
+      </td>
+      <td <%= sort_td_class_helper "edition" %>>
+        <%= sort_link_helper "prints_list", "Edition", "upper(edition)" %>
+      </td>
+	  
+	<%= render :partial => @prints %>
+</table>
+<!-- end _printlist.html.erb-->

@@ -1,0 +1,28 @@
+<h1>Login</h1>
+
+<%=flash_notice%>
+
+<div class="form">
+
+	<fieldset>
+		<legend>Enter username/password</legend>
+		<% form_tag :action => "create" do%>
+			<div>
+				<label for = "username">Username: </label><br />
+				<%=text_field_tag :username, params[:username], :class=> "other" %>
+			</div>
+			<div>
+				<label for="password">Password: </label><br />
+				<%=password_field_tag :password, params[:password], :class=> "short" %>
+			</div>
+
+			<%=submit_tag "Login" %>
+			<div style="visibility:hidden;">
+				<%= link_to 'I forgot my password', :action => 'reset_password' %>
+			</div>
+		<%end%>
+	</fieldset>
+	
+	
+	
+</div>

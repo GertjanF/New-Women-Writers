@@ -1,0 +1,23 @@
+<h1>Create a new language</h1>
+<div class="form">
+	<!-- # START:errors -->
+		<%= error_messages_for :language -%>
+	<!-- # END:errors -->
+
+  <fieldset>
+		<legend>Enter language details</legend>
+		<% form_for :language, :url => { :action => "create", :backtoauthor => params[:backtoauthor], :backtowork => params[:backtowork], :backtoreception => params[:backtoreception], :reception_id => params[:reception_id], :work_id => params[:work_id], :author_id => params[:author_id], } do |form| %> 
+			<%= render :partial => 'form', :object => form  %>
+			<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+			<% if params[:backtoauthor]=='language' %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:controller => 'authors', :action => 'edit', :id => params[:author_id]}, :title => "cancel changes"  %>
+			<% elsif params[:backtowork]=='language' %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:controller => 'works', :action => 'edit', :id => params[:work_id]}, :title => "cancel changes"  %>
+			<% elsif params[:backtoreception]=='language' %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:controller => 'receptions', :action => 'edit', :id => params[:reception_id]}, :title => "cancel changes"  %>
+			<% else %>
+				<%= link_to image_tag("cancel.png", :border=>0), :action => 'index', :title => "cancel changes"  %>
+			<% end %>
+		<% end %>
+  </fieldset>
+</div>

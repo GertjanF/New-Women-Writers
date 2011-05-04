@@ -1,0 +1,27 @@
+<h1>Help texts</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= link_to "New", :action => 'new' %>
+
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "object_controller" %>>
+        <%= sort_link_helper "helps_list", "Object", "upper(object_controller)" %>
+      </td>
+	  <td <%= sort_td_class_helper "object_action" %>>
+        <%= sort_link_helper "helps_list", "Page", "upper(object_action)" %>
+      </td>
+	</tr>
+	<% @helptexts.each do |help| %>
+	<tr>
+		<td><%= link_to h(help.object_controller), :action => 'show', :id => help.id %></td>
+		<td><%= link_to h(help.object_action), :action => 'show', :id => help.id %></td>
+	</tr>
+	<% end %>
+
+</table>

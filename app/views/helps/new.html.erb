@@ -1,0 +1,29 @@
+<h1>Create a new help page</h1>
+
+<div class="form">
+<!-- # START:errors -->
+	<%= error_messages_for :help -%>
+<!-- # END:errors -->
+
+  <fieldset>
+  <legend>Enter help text</legend>
+	<% form_for :help, :url => { :action => "create" } do |form| %> 
+
+<div>
+	<%= form.text_field( :object_controller, :size => 20) %>
+</div>
+
+<div>
+	<%= form.text_field( :object_action, :size => 20) %>
+</div>
+
+<div>
+	<%= form.text_area( :help_text, :rows => 5) %>
+</div>
+
+<%= submit_tag "Create", :class => "submit" %>
+<%= link_to "cancel", { :action => "index" }, :class => "cancel" %>
+
+  <% end %>
+  </fieldset>
+</div>

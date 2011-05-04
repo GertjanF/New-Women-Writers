@@ -1,0 +1,5 @@
+<tr>
+	<td><%= link_to h(library.name), library_path(:id => library.id) %></td>
+	<td><%= link_to h(library.short_name), library_path(:id => library.id) %></td>
+	<td><% unless library.country.nil? %><%= link_to h(library.country.name), country_path(:id => library.country.id) , :class=>"subcountry" %><% end %></td>	
+</tr>

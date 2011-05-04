@@ -1,0 +1,16 @@
+<!-- start _work_urllist.html.erb-->
+<table>
+    <tr>
+	  <td <%= sort_td_class_helper "works.title" %>>
+        <%= sort_link_helper "work_urls_list", "Work", "upper(works.title)" %>
+      </td>
+      <td <%= sort_td_class_helper "title" %>>
+        <%= sort_link_helper "work_urls_list", "Link title", "upper(work_urls.title)" %>
+      </td>
+	  <td <%= sort_td_class_helper "url" %>>
+        <%= sort_link_helper "work_urls_list", "Link url", "upper(url)" %>
+      </td>
+    </tr>
+	<%= render :partial => @work_urls %>
+</table>
+<!-- end _work_urllist.html.erb-->

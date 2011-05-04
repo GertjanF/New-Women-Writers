@@ -1,0 +1,10 @@
+<!-- start _topoilist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "topos" %>>
+        <%= sort_link_helper "topois_list", "Topos", "upper(topos)" %>
+      </td>
+	  
+	<%= render :partial => @topois %>
+</table>
+<!-- end _topoilist.html.erb-->

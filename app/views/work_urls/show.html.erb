@@ -1,0 +1,28 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Weblinks works:", :action => "index" %>
+ <%=h @work_url.title %>
+</h1>
+<div class="details">
+<table class="work_url details">
+<tr class="work_url details"><td class="work_url details">Work:</td><td class="work_url details"><% unless @work_url.work.nil? %><%= link_to h(@work_url.work.title), work_path(:id => @work_url.work.id) %><% end %></td></tr>
+<tr class="work_url details"><td class="work_url details">Title:</td><td class="work_url details"><%=h @work_url.title %></td></tr>
+<tr class="work_url details"><td class="work_url details">Url:</td><td class="work_url details"><a href="<%=h @work_url.url %>"><%=h @work_url.url %></a></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="work_url details"><td class="work_url details">Updated at:</td><td class="work_url details"><%=h @work_url.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@work_url, 'link') %>
+<% if admin? %>
+		<%= delete_button(@work_url, 'link') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+</div>

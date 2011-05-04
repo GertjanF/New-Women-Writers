@@ -1,0 +1,7 @@
+<!-- Start userchange -->
+<tr>
+	<td class="sub change" id="change_<%=h change.id%>">
+	<%= link_to h(change.changetype+' '+change.object_name+' (id='+change.object_id.to_s+')'), :controller => change.object_name, :action => "show", :id => change.object_id  %></td>
+	<td class="sub change" id="change_<%=h change.id%>"><%= change.updated_at.strftime('%d-%m-%Y %H:%M') %></td>
+	<td><% if change.approved == 1 then %>Approved<% else %><% end %>
+</tr>

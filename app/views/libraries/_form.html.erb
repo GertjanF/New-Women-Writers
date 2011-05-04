@@ -1,0 +1,59 @@
+<!-- #Name -->
+<div>
+	<%= form.label :name %>:<br />
+	<%= form.text_field :name, :class => "name" %>
+</div>
+
+<!-- #Shortname -->
+<div>
+	<%= form.label :short_name %>:<br />
+	<%= form.text_field :short_name, :size => 10, :class => "shortname" %>
+</div>
+
+<!-- #Address -->
+<div>
+	<%= form.label :address %>:<br />
+	<%= form.text_field :address, :class => "other" %>
+</div>
+
+<!-- #Postcode -->
+<div>
+	<%= form.label :postcode %>:<br />
+	<%= form.text_field :postcode, :size => 7, :class => "postcode" %>
+</div>
+
+<!-- #City -->
+<div>
+	<%= form.label :city %>:<br />
+	<%= form.text_field :city, :class => "other" %>
+</div>
+
+<!-- #Country -->
+<div>
+	<%= form.label :country %>:<br />
+	<%= form.collection_select( :country_id, Country.find(:all, :order => :name), :id, :name, {:prompt => true},{:class=>'wideselect'}) %>
+</div>
+
+<!-- #Telephone -->
+<div>
+	<%= form.label :telephone %>:<br />
+	<%= form.text_field :telephone, :size => 20, :class => "telephone" %>
+</div>
+
+<!-- #Email -->
+<div>
+	<%= form.label :email %>:<br />
+	<%= form.text_field :email, :size => 100, :class => "email" %>
+</div>
+
+<!-- #Catalogus url -->
+<div>
+	<%= form.label :url_to_catalogus %>:<br />
+	<%= form.text_field :url, :class => "link" %>
+</div>
+
+<!-- #Notes -->
+<div>
+	<%= form.label :notes %>:<br />
+	<%= form.text_area :notes, :rows => 4, :class => "notes" %>
+</div>

@@ -1,0 +1,27 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Country:", :action => "index" %>
+ <%=h @country.name %>
+</h1>
+<div class="details"><p>
+<table class="country details">
+<tr class="country details"><td class="country details">Name:</td><td class="country details"><%=h @country.name %></td></tr>
+<tr class="country details"><td class="country details">Short name:</td><td class="country details"><%=h @country.short_name %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="country details"><td class="country details">Updated at:</td><td class="country details"><%=h @country.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@country, 'country') %>
+<% if admin? %>
+		<%= delete_button(@country, 'country') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+</div>

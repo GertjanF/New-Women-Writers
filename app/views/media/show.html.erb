@@ -1,0 +1,32 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Reception type:", :action => "index" %>
+ <%=h @medium.medium %>
+</h1>
+<div class="details">
+<table class="medium details">
+<tr class="medium details"><td class="medium details">Name:</td><td class="medium details"><%=h @medium.medium %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="medium details"><td class="medium details">Updated at:</td><td class="medium details"><%=h @medium.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@medium, 'medium') %>
+<% if admin? %>
+		<%= delete_button(@medium, 'medium') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+<h2>Receptions of this reception type</h2>
+<table>
+	<%= render :partial => "reception", :collection => @medium.receptions, :receptions => @medium.receptions.sort!{|a,b| a.title <=> b.title} %>
+	<%= no_records(@medium.receptions) %>
+</table>
+	
+</div>

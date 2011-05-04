@@ -1,0 +1,10 @@
+<!-- _author.html.erb -->
+<tr>
+	<td class="line_number"><%= @numbered_list %></td>
+	<td class="readerflag" title="this author has no works in this database"><% if author.reader? %><%= CGI::unescapeHTML("&reg;") %>&nbsp;<% end %></td>
+	<td><%= link_to h(author.name), author_path(:id => author.id) %></td>
+	<td><%= link_to h(author.year_born), author_path(:id => author.id) %></td>
+	<td><%= link_to h(author.year_death), author_path(:id => author.id) %></td>
+	<td><% for country in author.countries %><%= country.name + "<br />"%><% end %></td>
+	<td><% for language in author.languages %><%= language.language + "<br />"%><% end %></td>
+</tr>

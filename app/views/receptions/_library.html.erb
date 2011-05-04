@@ -1,0 +1,9 @@
+<!-- show library  -->
+	<% if library.url.blank? %>
+		<%=link_to h(library.name), :controller =>"libraries", :action => "show", :id => library.id %> 
+	<% else %>
+		<a href="<%= library.url %>" target="_blank" ><%= library.name %></a>
+	<% end %>
+	(<%=h library.short_name %>)
+		<br />
+

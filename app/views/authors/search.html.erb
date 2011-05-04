@@ -1,0 +1,21 @@
+<h1>Search authors</h1>
+
+<div class="form">
+<!-- # START:errors -->
+	<%= error_messages_for :author -%>
+<!-- # END:errors -->
+
+  <fieldset>
+  <legend>Start typing author name</legend>
+  
+	<%= text_field_tag :author_name  %></p>
+	<br/>
+	<%= observe_field(:author_name, :frequency => 0.25, :update =>:search_result, :url => { :action => :result }, :with => "'search_name=' +value") %>
+
+	<p>Search Results </p>
+  <div id="search_result"></div>
+	
+	<%= link_to 'Back',:controller=>'authors',:action => 'index' %>
+
+  </fieldset>
+</div>

@@ -1,0 +1,99 @@
+<!-- #Author -->
+<div>
+	<% unless params[:author_id] .nil? %>
+		Author:<br /><b><%= Author.find( params[:author_id] ).name %></b>
+		<%=  hidden_field_tag 'work[author_id]', params[:author_id] %>
+	<% else %>
+		<%= form.label :author %>:<br />
+		<%= form.collection_select( :author_id, Author.find(:all, :order => :name), :id, :name,{:prompt => true},{:class=>'wideselect'}) %>
+	<% end %>
+	<input type="hidden" name="backtowork" value="0" />
+</div>
+
+<!-- # Title -->
+<div>
+	<%= form.label :title %>:<br />
+	<%= form.text_field :title, :size => 100, :class => "name" %>
+</div>
+
+<!-- # Publish year  -->
+<div>
+	<%= form.label :publish_year %>:<br />
+	<%= form.text_field :publish_year , :size => 4, :class => "year" %>
+</div>
+
+<!-- # Print -->    
+<div>
+	<%= form.label :editions %>:<br />
+	
+	<table>
+	<% @work.prints.each do |one| %>
+		<tr><td>
+		<%= link_to image_tag("xxedit.png", :border => 0), :controller => 'prints', :action => 'edit', :id => one.id %>
+		<%= link_to_function image_tag("xxcancel.png", :border=>0), "deleteOneFromMany('prints', one.id.to_s)" %>
+		</td>
+		<td>
+			<% unless one.edition.blank? %><%= one.edition %> - <% end %>
+			<%= one.year %>
+			<% unless one.publisher.blank? %> - <%= one.publisher %> - <% end %>
+			<% unless one.location.blank? %> - <%= one.location %><% end %>
+		</td></tr>
+	<% end %>
+	</table>
+
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add an edition" , "addSubTable('print', 'work')" %>
+</div>
+
+<!-- # Genres -->
+<div>
+	<%= form.label :genres %>:<br />
+<div><%= @work.genres.collect { |t| t.genre }.join(' - ') %></div>
+    <%= collection_select :work, :genre_ids, Genre.find(:all, :order => 'genre ASC'), :id, :genre, { :selected => @work.genre_ids }, { :multiple => true, :name => 'work[genre_ids][]', :size => 5 } -%>
+    <div class="small">(to select or deselect more than one use [ctrl-click])</div>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a genre" , "addSubTable('genre', 'work')" %>
+</div>
+
+<!-- # Country -->
+<div>
+	<%= form.label :country %>:<br />
+	<%= form.collection_select( :country_id, Country.find(:all, :order => :name), :id, :name,{:include_blank => true},{:class=>'wideselect'}) %>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a country" , "addSubTable('country', 'work')" %>
+</div>
+
+<!-- # Languages -->
+<div>
+	<%= form.label :language_used %>:<br />
+	<%= form.collection_select( :language_id, Language.find(:all, :order => :language), :id, :language,{:include_blank => true},{:class=>'wideselect'}) %>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a language" , "addSubTable('language', 'work')" %>
+</div>
+
+<!-- # Topos -->
+<div>
+	<%= form.label :topoi %>:<br />
+<div><%= @work.topois.collect { |t| t.topos }.join(' - ') %></div>
+    <%= collection_select :work, :topoi_ids, Topoi.find(:all, :order => 'topos ASC'), :id, :topos, { :selected => @work.topoi_ids }, { :multiple => true, :name => 'work[topoi_ids][]', :size => 5 } -%>
+    <div class="small">(to select or deselect more than one use [ctrl-click])</div>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a topos" , "addSubTable('topos', 'work')" %>
+</div>
+
+<!-- #Library -->
+<div>
+	<%= form.label :libraries %>:<br />
+<div><%= @work.libraries.collect { |t| t.name }.join(' - ') %></div>
+    <%= collection_select :work, :library_ids, Library.find(:all, :order => 'name ASC'), :id, :name, { :selected => @work.library_ids }, { :multiple => true, :name => 'work[library_ids][]', :size => 5 } -%>
+    <div class="small">(to select or deselect more than one use [ctrl-click])</div>
+	<%= link_to_function image_tag("xxadd.png", :border=>0)+"add a library" , "addSubTable('library', 'work')" %>
+</div>
+
+<!-- # Notes  -->
+<div>
+	<%= form.label :provisional_notes %>:<br />
+	<%= form.text_area :notes, :rows => 4, :class => "text" %>
+</div>
+
+<!-- # Work_url -->
+<div>
+	<%= form.label :work_urls, "Relevant weblinks" %>:<br />
+	<%= one_to_many_link_helper(@work.work_urls, 'work_urls', 'title', 'url', 'work') %>
+</div>
+

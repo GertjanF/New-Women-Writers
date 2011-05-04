@@ -1,0 +1,58 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Reception", :action => "index" %> of 
+	<% unless @reception.work.nil? %>
+		<%= link_to h(@reception.work.author.name), :controller => "authors", :action => "show", :id => @reception.work.author.id %>, 
+		<i><%= link_to h(@reception.work.title), :controller => "works", :action => "show", :id => @reception.work.id %></i>
+	<% end %>
+ <% if admin? %>
+ <% unless approved?('receptions', @reception.id) %>
+	<%= link_to image_tag("xaccept.png", :border => 0, :title => "Approve the changes made to this reception"), {:controller => "changes", :action => 'approve', :object_name => 'receptions', :object_id => @reception.id}, :confirm => "This will approve all changes made to this document \nAre you sure?"  %>
+<% end %>
+<% end %>
+
+<% unless @position.blank? %>
+	<div class="toright">
+		<% unless @position == 0 %>
+			<%= link_to image_tag("left.png", :border=>0, :title => "Go to the previous reception in your selection"), :action => 'show', :id => @previous_reception %>
+		<% end %>
+		<% unless @position == @results_length.to_i - 1 %>
+			<%= link_to image_tag("right.png", :border=>0, :title => "Go to the next reception in your selection"), :action => 'show', :id => @next_reception %>
+		<% end %>
+	</div>
+<% end %>
+
+</h1>
+<div class="details">
+	<table class="reception details">
+	<tr class="reception details"><td class="reception details">Reception by:</td><td class="reception details"><% unless @reception.author.nil? %><%= link_to h(@reception.author.name), :controller => "authors", :action => "show", :id => @reception.author.id %><% end %></td></tr>
+	<tr class="reception details"><td class="reception details">Gender:</td><td class="reception details"><% unless @reception.author.nil? %><%=h @reception.author.fullgender %><% end %></td></tr>
+	<tr class="reception details"><td class="reception details">Title:</td><td class="reception details"><%=h @reception.title %>
+	<tr class="reception details"><td class="reception details">Reception type:</td><td class="reception details"><% unless @reception.medium.nil? %><%=h @reception.medium.medium %><% end %></td></tr>
+	<tr class="reception details"><td class="reception details">Country:</td><td class="reception details"><% unless @reception.country.nil? %><%=h @reception.country.name %><%end %></td></tr>
+	<tr class="reception details"><td class="reception details">Language used:</td><td class="reception details"><% unless @reception.language.nil? %><%= @reception.language.language %><% end %></td></tr>
+	<tr class="reception details"><td class="reception details">Year:</td><td class="reception details"><%=h @reception.year %>
+	<tr class="reception details"><td class="reception details">Presence in public libraries:</td><td class="reception details"><% unless @reception.libraries.nil? %><%= render :partial => "library", :collection => @reception.libraries %><% end %></td></tr>
+	<tr class="reception details"><td class="reception details">Relevant weblinks:</td><td class="reception details"><% unless @reception.reception_urls.nil? %><%= render :partial => "reception_url", :collection => @reception.reception_urls %><% end %></td></tr>
+	<tr class="reception details"><td class="reception details">References:</td><td class="details crlfsafe"><%=h @reception.references %></td></tr>
+	<tr class="reception details"><td class="reception details">Source:</td><td class="reception details"><% unless @reception.source.nil? %><%=h @reception.source.short_name %><% end %></td></tr>
+	<% if logged_in? %><tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="reception details"><td class="reception details">Provisional notes, topoi, precis:</td><td class="details crlfsafe"><%= @reception.excerpt %></td></tr>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="reception details"><td class="reception details">Updated at:</td><td class="reception details"><%=h @reception.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+	<tr class="reception details"><td class="reception details">Editors:</td><td class="reception details"><% unless @reception.changes.nil? %><%= render :partial => "change", :collection => @reception.changes.sort_by {|obj| obj.created_at}%><% end %></td></tr>
+	</table>
+
+<% if editor? %>
+	<p class="modify">
+	<div>
+		<%= edit_button(@reception, 'reception') %>
+<% if admin? %>
+		<%= delete_button(@reception, 'reception') %>
+<% end %>
+	</div>
+	</p>
+<% end %>
+
+</div>

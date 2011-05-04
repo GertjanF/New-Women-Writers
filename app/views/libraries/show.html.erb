@@ -1,0 +1,34 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Library:", :action => "index" %>
+	<%=h @library.name %>
+</h1>
+<div class="details"><p>
+	<table class="library details">
+		<tr class="library details"><td class="library details">Name:</td><td class="library details"><%=h @library.name %></td></tr>
+		<tr class="library details"><td class="library details">Short name:</td><td class="library details"><%=h @library.short_name %></td></tr>
+		<tr class="library details"><td class="library details">Address:</td><td class="library details"><%=h @library.address %></td></tr>
+		<tr class="library details"><td class="library details">Postcode:</td><td class="library details"><%=h @library.postcode %></td></tr>
+		<tr class="library details"><td class="library details">City:</td><td class="library details"><%=h @library.city %></td></tr>
+		<tr class="library details"><td class="library details">Country:</td><td class="library details"><% unless @library.country.nil? %><%=h @library.country.name %><% end %></td></tr>
+		<tr class="library details"><td class="library details">Telephone:</td><td class="library details"><%=h @library.telephone %></td></tr>
+		<tr class="library details"><td class="library details">Email:</td><td class="library details"><%=h @library.email %></td></tr>
+		<tr class="library details"><td class="library details">Link to catalogus:</td><td class="library details"><% unless @library.url.blank? %><a href="<%= @library.url %>" target="_blank" >Catalogus</a><% end %><br /></td></tr>
+		<% if logged_in? %><tr class="library details"><td class="library details">Notes:</td><td class="crlfsafe details"><%=h @library.notes %></td></tr>
+			<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+			<tr class="library details"><td class="library details">Updated at:</td><td class="library details"><%=h @library.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+		<% end %>
+	</table>
+
+	<% if editor? %>
+	<p class="modify">
+		<div>
+			<%= edit_button(@library, 'library') %>
+<% if admin? %>
+		<%= delete_button(@library, 'library') %>
+<% end %>
+		</div>
+	</p>
+	<% end %>
+
+</div>

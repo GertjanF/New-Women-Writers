@@ -1,0 +1,28 @@
+<h1>Reception types</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @media, "reception type" %>
+
+</form>
+</div>
+
+<%= will_paginate @media %>
+
+<% if editor? %>
+	<!-- Add author button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_medium_path, :title => "add new reception type" %>
+<% end %>
+
+	<%= no_records(@media) %>
+
+	<div class="media_list" id="media_list">
+		<%= render :partial => "mediumlist" %>
+	</div>
+	<div class="media_list" id="media_list">
+		<%= will_paginate @media %>
+	</div>

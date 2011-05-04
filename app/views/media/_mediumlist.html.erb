@@ -1,0 +1,10 @@
+<!-- start _mediumlist.html.erb-->
+<table>
+    <tr>
+      <td <%= sort_td_class_helper "medium" %>>
+        <%= sort_link_helper "media_list", "Reception type", "upper(medium)" %>
+      </td>
+	  
+	<%= render :partial => @media %>
+</table>
+<!-- end _mediumlist.html.erb-->

@@ -1,0 +1,28 @@
+<h1>Weblinks authors</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @author_urls, "author name" %>
+
+</form>
+</div>
+
+<%= will_paginate @author_urls %>
+
+<% if editor? %>
+	<!-- Add author_url button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_author_url_path, :title => "add new author_url" %>
+<% end %>
+
+	<%= no_records(@author_urls) %>
+	
+	<div class="author_urls_list" id="author_urls_list">
+		<%= render :partial => "author_urllist" %>
+	</div>
+	<div class="author_urls_list" id="author_urls_list">
+		<%= will_paginate @author_urls %>
+	</div>

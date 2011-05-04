@@ -1,0 +1,15 @@
+<tr>
+	<td  class="sub work" id="work_<%=h work.id %>" >
+	<% if editor? %>	
+		<!-- delete and edit buttons -->
+		<!--%= link_to image_tag("xdelete.png", :border=>0, :title => "delete this work), {:controller => "works", :action => 'destroy', :topoi_id => work.topoi.id, :id => work.id}, :confirm => "This will delete this work. \n\nAre you sure?", :method => :delete  %-->
+		<%= link_to image_tag("xedit.png", :border=>0, :title => "edit this work"), {:controller => "works", :action => 'edit',  :id => work.id}  %>
+	<% end %>
+
+		<!-- link to show work via title -->
+		<%=link_to h(work.title), 
+			:controller =>"works",
+			:action => "show",
+			:id => work.id %>
+	</td>
+</tr>

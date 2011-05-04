@@ -1,0 +1,32 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Language:", :action => "index" %>
+ <%=h @language.language %>
+</h1>
+<div class="details">
+<table class="language details">
+<tr class="language details"><td class="language details">Language:</td><td class="language details"><%=h @language.language %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="language details"><td class="language details">Updated at:</td><td class="language details"><%=h @language.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@language, 'language') %>
+<% if admin? %>
+		<%= delete_button(@language, 'language') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+<h2>Authors who wrote in this language</h2>
+<table>
+	<%= render :partial => "author", :collection => @language.authors, :authors => @language.authors.sort!{|a,b| a.name <=> b.name} %>
+	<%= no_records(@language.authors) %>
+</table>
+	
+</div>

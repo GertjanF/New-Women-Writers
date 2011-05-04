@@ -1,0 +1,16 @@
+<!-- start _reception_urllist.html.erb-->
+<table>
+    <tr>
+	  <td <%= sort_td_class_helper "receptions.title" %>>
+        <%= sort_link_helper "reception_urls_list", "Reception", "upper(receptions.title)" %>
+      </td>
+      <td <%= sort_td_class_helper "reception_urls.title" %>>
+        <%= sort_link_helper "reception_urls_list", "Link title", "upper(reception_urls.title)" %>
+      </td>
+	  <td <%= sort_td_class_helper "url" %>>
+        <%= sort_link_helper "reception_urls_list", "Link url", "upper(reception_urls.url)" %>
+      </td>
+    </tr>
+	<%= render :partial => @reception_urls %>
+</table>
+<!-- end _reception_urllist.html.erb-->

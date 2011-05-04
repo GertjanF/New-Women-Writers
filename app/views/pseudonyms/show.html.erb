@@ -1,0 +1,27 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Pseudonym:", :action => "index" %>
+<%=h @pseudonym.pseudonym %>
+</h1>
+<div class="details">
+<table class="pseudonym details">
+<tr class="pseudonym details"><td class="pseudonym details">Author:</td><td class="pseudonym details"><% unless @pseudonym.author.nil? %><%= link_to h(@pseudonym.author.name), author_path(:id => @pseudonym.author.id) %><% end %></td></tr>
+<tr class="pseudonym details"><td class="pseudonym details">Pseudonym:</td><td class="pseudonym details"><%=h @pseudonym.pseudonym %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="pseudonym details"><td class="pseudonym details">Updated at:</td><td class="pseudonym details"><%=h @pseudonym.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@pseudonym, 'pseudonym') %>
+<% if admin? %>
+		<%= delete_button(@pseudonym, 'pseudonym') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+	
+</div>

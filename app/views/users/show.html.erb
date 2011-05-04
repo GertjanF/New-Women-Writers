@@ -1,0 +1,52 @@
+<%= flash_notice %>
+
+<h1><%= link_to "User:", :action => "index" %>
+ <%=h @user.username %>
+</h1>
+<div class="details">
+<table class="user details">
+<tr class="user details"><td class="user details">Username:</td><td class="user details"><%=h @user.username %></td></tr>
+<tr class="user details"><td class="user details">Name:</td><td class="user details"><%=h @user.name %></td></tr>
+<tr class="user details"><td class="user details">Email:</td><td class="user details"><%=h @user.email %></td></tr>
+<tr class="user details"><td class="user details">Status:</td><td class="user details">
+		<% if @user.level == 1 %>Admin
+		<% elsif @user.level == 2 %> Editor
+		<% else %> Registered
+		<% end %></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="user details"><td class="user details">Last changed:</td><td class="user details"><%=h @user.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+
+</table>
+
+	<% if admin? %>
+		This user has made <%= @authorchanges %> changes to authors, <%= @workchanges %> changes to works, and <%= @receptionchanges %> changes to receptions.
+	<% end %>
+	
+<% if logged_in? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@user, 'user') %>
+<% if admin? %>
+		<%= delete_button(@user, 'user') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+<h2>Changes this user made</h2>
+
+<table>
+	<form name="formnaam">
+		<%= hidden_field_tag('sort', params[:sort]) %>
+		<%= hidden_field_tag('page', params[:page]) %>
+	</form>
+<%= will_paginate @changes %>
+	<div class="changes_list" id="changes_list">
+		<%= render :partial => "userchangelist" unless @changes.empty? %>
+	</div>
+	<%= no_records(@user.changes) %>
+</table>
+	
+</div>

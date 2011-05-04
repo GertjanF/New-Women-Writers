@@ -1,0 +1,20 @@
+<h1>Edit pseudonym</h1>
+
+<div class="form">
+	<!-- # START:errors -->
+	<%= error_messages_for :pseudonym -%>
+	<!-- # END:errors -->
+
+	<fieldset>
+		<legend>Enter pseudonym details</legend>
+		<% form_for :pseudonym, :url => { 
+			:action => "update", 
+			:id=>@pseudonym.id, 
+			:author_id => params[:author_id]} do |form| %> 
+			
+			<%= render :partial => 'form', :object => form  %>
+				<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:action => 'show', id=>@pseudonym.id}, :title => "cancel changes"  %>
+		<% end %>
+	</fieldset>
+</div>

@@ -1,0 +1,29 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Weblinks authors:", :action => "index" %>
+ <%=h @author_url.title %>
+</h1>
+<div class="details">
+<table class="author_url details">
+<tr class="author_url details"><td class="author_url details">Author:</td><td class="author_url details"><% unless @author_url.author.nil? %><%= link_to h(@author_url.author.name), author_path(:id => @author_url.author.id) %><% end %></td></tr>
+<tr class="author_url details"><td class="author_url details">Title:</td><td class="author_url details"><%=h @author_url.title %></td></tr>
+<tr class="author_url details"><td class="author_url details">Url:</td><td class="author_url details"><a href="<%=h @author_url.url %>"><%=h @author_url.url %></a></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="author_url details"><td class="author_url details">Updated at:</td><td class="author_url details"><%=h @author_url.updated_at.strftime('%d %B %Y, %H:%M')  %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@author_url, 'link') %>
+<% if admin? %>
+		<%= delete_button(@author_url, 'link') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+
+</div>

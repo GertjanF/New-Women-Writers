@@ -1,0 +1,19 @@
+<h1>Edit relation type</h1>
+
+<div class="form">
+	<!-- # START:errors -->
+	<%= error_messages_for :relation_type -%>
+	<!-- # END:errors -->
+
+	<fieldset>
+		<legend>Enter relation type details</legend>
+		<% form_for :relation_type, :url => { 
+			:action => "update", 
+			:id=>@relation_type.id} do |form| %> 
+			
+			<%= render :partial => 'form', :object => form  %>
+				<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:action => 'show', id=>@relation_type.id}, :title => "cancel changes"  %>
+		<% end %>
+	</fieldset>
+</div>

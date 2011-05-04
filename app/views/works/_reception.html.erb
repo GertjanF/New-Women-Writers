@@ -1,0 +1,51 @@
+<tr>
+	<td  class="sub reception" id="reception_<%=h reception.id %>" >
+		<% @numbered_reception_list += 1 %>
+		<% if editor? %>
+		<!-- delete and edit buttons -->
+		<!--%= link_to image_tag("xdelete.png", :border=>0, :title => "delete this reception"), {:controller => "receptions", :action => 'destroy', :work_id => reception.work.id, :id => reception.id}, :confirm => "This will delete this reception. \n\nAre you sure?", :method => :delete  %-->
+		<%= link_to image_tag("xedit.png", :border=>0, :title => "edit this reception"), {:controller => "receptions", :action => 'edit', :id => reception.id}  %>
+		<% end %>
+	</td>
+		
+	<td class="line_number"><%= @numbered_reception_list %></td>
+		
+		<td class="sub reception" id="reception_<%=h reception.id%>">
+			<!-- link to show author of the reception via title -->
+			<% unless reception.author.nil? %><%=link_to reception.author.name, 
+				:controller =>"authors",
+				:action => "show",
+				:id => reception.author.id %><% end %>
+		</td>
+		
+		<!-- link to show reception via title -->
+		<td  class="sub reception" id="reception_<%=h reception.id %>" >
+		<%=link_to h(reception.title), 
+			:controller =>"receptions",
+			:action => "show",
+			:id => reception.id %></td>
+			
+		<td class="sub reception" id="reception_<%=h reception.id%>">
+			<!-- show author gender -->
+			<% unless reception.author.nil? %><%=h reception.author.gender %><% end %>
+		</td>
+
+		<td class="sub reception" id="reception_<%=h reception.id%>">
+			<!-- link to show reception -->
+			<% unless reception.medium.nil? %><%=link_to reception.medium.medium, 
+				:controller =>"receptions",
+				:action => "show",
+				:id => reception.id %><% end %>
+		</td>
+			
+		<td class="sub reception" id="reception_<%=h reception.id%>">
+			<!-- link to show country -->
+			<% unless reception.country.nil? %><%= reception.country.name %><% end %>
+		</td>
+		
+		<td class="sub reception" id="reception_<%=h reception.id%>">
+			<!-- link to show reception year -->
+			<%=h reception.year %>
+		</td>
+
+</tr>

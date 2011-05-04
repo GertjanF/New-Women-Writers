@@ -1,0 +1,27 @@
+<h1>Topoi</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @topois, "topos" %>
+
+</form>
+</div>
+
+<%= will_paginate @topois %>
+
+<% if editor? %>
+	<!-- Add topoi button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_topoi_path, :title => "add new topos" %>
+<% end %>
+
+	<%= no_records(@topois) %>
+
+	<div class="topois_list" id="topois_list">
+		<%= render :partial => "topoilist" unless @topois.empty? %>
+	</div>
+	 <%= will_paginate @topois %>
+

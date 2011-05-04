@@ -1,0 +1,28 @@
+<h1>Create a new country</h1>
+
+<div class="form">
+<!-- # START:errors -->
+	<%= error_messages_for :country -%>
+<!-- # END:errors -->
+
+  <fieldset>
+  <legend>Enter country details</legend>
+	<% form_for :country, :url => { :action => "create", :backtoauthor => params[:backtoauthor], :backtoreception => params[:backtoreception], :backtowork => params[:backtowork], :work_id => params[:work_id], :author_id => params[:author_id], :reception_id => params[:reception_id] } do |form| %> <!-- <label id="code.rails_app.controller_views.3"/> -->
+	
+	<%= render :partial => 'form', :object => form  %>
+		<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+			<% if params[:backtoauthor]=='country' %>
+					<%= link_to image_tag("cancel.png", :border=>0), {:controller => 'authors', :action => 'edit', :id => params[:author_id]}, :title => "cancel changes"  %>
+			<% elsif params[:backtoreception]=='country' %>
+					<%= link_to image_tag("cancel.png", :border=>0), {:controller => 'receptions', :action => 'edit', :id => params[:reception_id]}, :title => "cancel changes"  %>
+			<% elsif params[:backtowork]=='country' %>
+					<%= link_to image_tag("cancel.png", :border=>0), {:controller => 'works', :action => 'edit', :id => params[:work_id]}, :title => "cancel changes"  %>
+			<% else %>
+				<%= link_to image_tag("cancel.png", :border=>0), :action => 'index', :title => "cancel changes"  %>
+			<% end %>
+
+		<!--%= submit_tag "Create", :class => "submit" %-->
+		<!--%= link_to "cancel", { :action => "index" }, :class => "cancel" %-->
+  <% end %>
+  </fieldset>
+</div>

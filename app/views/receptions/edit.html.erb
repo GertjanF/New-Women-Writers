@@ -1,0 +1,31 @@
+<span class="toright">
+	<%= link_to_function image_tag("help.png", :border => 0), "helpbox('receptions', 'form')", {:title => 'Show/hide the help page'} %>
+</span>
+
+<h1>Edit reception</h1>
+
+<div class="details crlfsafe" id="help"><%= @help_page.help_text %></div>
+
+<div class="form">
+	<!-- # START:errors -->
+	<%= error_messages_for :reception -%>
+	<!-- # END:errors -->
+	
+	<%= flash_notice %>
+
+	<fieldset>
+		<legend>Enter reception details</legend>
+		<% form_for :reception, :url => { 
+			:action => "update", 
+			:id=>@reception.id,
+			:work_id => params[:work_id],
+			:author_id => params[:author_id]},
+			:html=>{:name=>"formnaam"} do |form| %> 
+
+		<%= render :partial => 'form', :object => form  %>
+			<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+			<%= link_to image_tag("cancel.png", :border=>0), {:action => 'show', :id => @reception.id}, :title => "cancel changes"  %>
+		<% end %>
+		
+	</fieldset>
+</div>

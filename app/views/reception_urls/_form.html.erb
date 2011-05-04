@@ -1,0 +1,18 @@
+<!-- #Reception -->
+<div>
+	<%= form.label :reception %>:<br />
+	<%= form.collection_select( :reception_id, Reception.find(:all, :order => 'title'), :id, :short_title,{:prompt => true},{:class=>'wideselect'}) %>
+</div>
+
+<!-- # START:title -->
+<div>
+	<%= form.label :title %>:<br />
+	<%= form.text_field :title, :class => "link" %>
+</div>
+
+<!-- # START:url -->
+<div>
+	<%= form.label :url %>:<br />
+	<%= form.text_field :url, :class => "url" %>
+</div>
+	

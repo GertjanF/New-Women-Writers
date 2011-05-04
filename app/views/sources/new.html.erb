@@ -1,0 +1,19 @@
+<h1>Create a new source</h1>
+<div class="form">
+	<!-- # START:errors -->
+		<%= error_messages_for :source -%>
+	<!-- # END:errors -->
+
+  <fieldset>
+		<legend>Enter source details</legend>
+		<% form_for :source, :url => { :action => "create", :backtoreception => params[:backtoreception], :reception_id => params[:reception_id] } do |form| %> 
+			<%= render :partial => 'form', :object => form  %>
+			<%= image_submit_tag ("accept.png", :alt => "save changes", :title => "save changes" , :class => 'image-submit') %>
+			<% if params[:backtoreception]=='source' %>
+				<%= link_to image_tag("cancel.png", :border=>0), {:controller => 'receptions', :action => 'edit', :id => params[:reception_id]}, :title => "cancel changes"  %>
+			<% else %>
+				<%= link_to image_tag("cancel.png", :border=>0), :action => 'index', :title => "cancel changes"  %>
+			<% end %>
+		<% end %>
+  </fieldset>
+</div>

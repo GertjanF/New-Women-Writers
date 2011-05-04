@@ -1,0 +1,26 @@
+<h1>Libraries</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @libraries, "library name" %>
+
+</form>
+</div>
+
+<%= will_paginate @libraries %>
+
+<% if editor? %>
+	<!-- Add library button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_library_path, :title => "add new library" %>
+<% end %>
+
+	<%= no_records(@libraries) %>
+
+	<div class="libraries_list" id="libraries_list">
+		<%= render :partial => "librarylist" unless @libraries.empty? %>
+	</div>
+	 <%= will_paginate @libraries %>

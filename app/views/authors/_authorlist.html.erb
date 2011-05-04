@@ -1,0 +1,30 @@
+<!-- start _authorlist.html.erb-->
+	<table>
+		<tr>
+		<td></td>
+		  <td></td>
+		  <td <%= sort_td_class_helper "name" %>>
+			<%= sort_link_helper "authors_list", "Name", "upper(name)" %>
+		  </td>
+		  <td <%= sort_td_class_helper "year_born" %>>
+			<%= sort_link_helper "authors_list", "Year born", "year_born" %>
+		  </td>
+		  <td <%= sort_td_class_helper "year_death" %>>
+			<%= sort_link_helper "authors_list", "Year of death", "year_death" %>
+		  </td>
+		  <td <%= sort_td_class_helper "countries.name" %>>
+			<%= sort_link_helper "authors_list", "Country", "upper(countries.name)" %>
+		  </td>
+		  <td <%= sort_td_class_helper "languages.language" %>>
+			<%= sort_link_helper "authors_list", "Language", "upper(languages.language)" %>
+		  </td>
+		</tr>
+		
+	<% @numbered_list = 0 %>
+	<% @authors.each do |author| %>
+	<% @numbered_list += 1 %>
+	<%= render :partial => author %>
+	<% end %>
+
+	</table>
+<!-- end _authorlist.html.erb-->

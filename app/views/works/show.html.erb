@@ -1,0 +1,71 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Work by:", :action => "index" %>
+ <%= link_to @work.author.name, :controller => 'authors', :action => 'show', :id => @work.author.id %>
+  <% if admin? %>
+ <% unless approved?('works', @work.id) %>
+	<%= link_to image_tag("xaccept.png", :border => 0, :title => "Approve the changes made to this work"), {:controller => "changes", :action => 'approve', :object_name => 'works', :object_id => @work.id}, :confirm => "This will approve all changes made to this document \nAre you sure?"  %>
+<% end %>
+<% end %>
+
+<% unless @position.blank? %>
+	<div class="toright">
+		<% unless @position == 0 %>
+			<%= link_to image_tag("left.png", :border=>0, :title => "Go to the previous work in your selection"), :action => 'show', :id => @previous_work %>
+		<% end %>
+		<% unless @position == @results_length.to_i - 1 %>
+			<%= link_to image_tag("right.png", :border=>0, :title => "Go to the next work in your selection"), :action => 'show', :id => @next_work %>
+		<% end %>
+	</div>
+<% end %>
+</h1>
+
+
+<div class="details">
+<table class="work details">
+<tr class="work details"><td class="work details">Title</td><td class="work details"><%=h @work.title %></td></tr>
+<tr class="work details"><td class="work details">Year of first publication:</td><td class="work details"><%=h @work.publish_year %></td></tr>
+<tr class="work details"><td class="work details">Editions:</td><td class="work details"><% unless @work.prints.nil? %><%= render :partial => "print", :collection => @work.prints %><% end %></td></tr>
+<tr class="work details"><td class="work details">Genres:</td><td class="work details"><%=h @genreline %></td></tr>
+<tr class="work details"><td class="work details">Country:</td><td class="work details"><% unless @work.country.nil? %><%= @work.country.name %><% end %></td></tr>
+<tr class="work details"><td class="work details">Language used:</td><td class="work details"><% unless @work.language.nil? %><%= @work.language.language %><% end %></td></tr>
+<tr class="work details"><td class="work details">Narrative topoi:</td><td class="work details"><%=h @toposline %></td></tr>
+<tr class="work details"><td class="work details">Presence in public libraries:</td><td class="work details"><% unless @work.libraries.nil? %><%= render :partial => "library", :collection => @work.libraries %><% end %></td></tr>
+<tr class="work details"><td class="work details">Relevant weblinks:</td><td class="work details"><% unless @work.work_urls.nil? %><%= render :partial => "work_url", :collection => @work.work_urls %><% end %></td></tr>
+
+<% if logged_in? %>
+<tr><td colspan="2"><hr class="line" noshade="noshade" /></td></tr>
+<tr class="work details"><td class="work details">Provisional notes:</td><td class="details crlfsafe"><%=h @work.notes %></td></tr>
+
+<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+<tr class="work details"><td class="work details">Editors:</td><td class="work details"><% unless @work.changes.nil? %><%= render :partial => "change", :collection => @work.changes.sort_by {|obj| obj.created_at}%><% end %></td></tr>
+<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@work, 'work') %>
+<% if admin? %>
+		<%= delete_button(@work, 'work') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+<hr class="line" noshade="noshade" />
+
+<a name="list_receptions"><h2>Receptions of this work
+	<% if editor? %><%= link_to image_tag("xadd.png", :border=>0),  
+		{:controller => "receptions",
+		:action => "new",
+		:work_id => @work.id}, :title => "add a reception to this work" %><% end %>
+</h2>
+<table>
+	<% @numbered_reception_list = 0 %>
+	<% unless @work.receptions.empty? %> <tr class="columnheader"><td></td><td></td><td>Author</td><td>Title</td><td>Gender</td><td>Reception type</td><td>Country</td><td>Year</td></tr><% end %>
+	<%= render :partial => "reception", :collection => @work.receptions, :receptions => @work.receptions.sort!{|a,b| a.author.name <=> b.author.name}  %>
+	<%= no_records(@work.receptions) %>
+</table>
+</a>
+</div>

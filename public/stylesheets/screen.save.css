@@ -1,0 +1,452 @@
+/**
+ * Copyright 2009 Huygens Instituut for the History of the Netherlands, Den Haag, The Netherlands.
+ *
+ * This file is part of New Women Writers.
+ *
+ * New Women Writers is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * New Women Writers is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with New Women Writers.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* =MAIN
+------------------------------------- */
+body, td, input, select, textarea, a {
+  font-size:  100%;
+  font-family: arial, helvetica, verdana, sans-serif;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, 
+pre, form, fieldset, input, p, blockquote, th, td {
+  margin: 0;
+  padding: 15;
+}
+body {
+  color: #333;
+  background-color: #fff;
+  font-size: 12px;
+}
+img {
+  border-width: 0;
+}
+a:link {
+	color: #B36B00;
+	text-decoration: none;
+}
+a:visited {
+  color: #333;
+  text-decoration: none;
+}
+a:hover {
+	color: #333;
+}
+p {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0 0 12px 0;
+}
+td {
+	vertical-align:text-top;
+	font-size: 12px;
+}
+h1 {
+  font-size: 24px;
+  line-height: 48px;
+  margin: 12px 0 0 0;
+}
+h2 {
+  font-size: 20px;
+  line-height: 24px;
+  margin: 8px 0 4px 0;
+}
+h3 {
+  font-size: 18px;
+  line-height: 24px;
+  margin: 12px 0 0 0;
+}
+.subauthor{
+	font-size: 12px;
+}
+.subwork{
+	font-size: 12px;
+}
+.subreception{
+	font-size: 12px;
+}
+
+/* =FLOATS
+------------------------------------- */
+/* clear floats */
+.clear:after,
+#nav:after, 
+.highlight:after,
+#new_presentation div:after {
+  content: "."; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;
+}
+.clear,
+#nav,
+.highlight, 
+#new_presentation div {
+  display: inline-block;
+}
+
+/* =LAYOUT
+------------------------------------- */
+#wrapper {
+  width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+#content {
+  padding: 1px 14px 30px;
+  border-left: 1px solid #DAD1B4;
+  border-right: 1px solid #DAD1B4;
+}
+#content dl {
+  margin-bottom: 18px;
+}
+
+/* =HEADER
+------------------------------------- */
+#logo {
+  background-color: #F8F5EE;
+  text-align: center;
+}
+#nav {
+  display: block;
+  background-color: #F8F5EE;
+  border-left: 1px solid #DAD1B4;
+  border-right: 1px solid #DAD1B4;
+  border-bottom: 1px solid #ECE6D2;
+}
+#nav ul {
+  float: left;
+  list-style-type: none;
+  margin-left: 5px;
+}
+#nav li {
+  float: left;
+  padding: 6px 0;
+  font-weight: bold;
+  font-size: 12px;
+}
+#nav li a {
+  float: left;
+  display: block;
+  padding: 4px 12px;
+  text-decoration: none;
+}
+#nav div {
+  padding: 10px;
+  margin-right: 5px;
+  text-align: right;
+  font-style: italic;
+  font-size: 13px;
+}
+#nav div a {
+  padding: 3px 0;
+}
+
+/* highlight tabs */
+.homepage      #nav_home a,
+.meetings      #nav_meetings a, 
+.presentations #nav_meetings a,
+.users         #nav_users a, 
+.photos        #nav_photos a,
+#nav a:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+/* =FOOTER 
+------------------------------------- */
+#footer {
+  background-color: #F8F5EE;
+  border: 1px solid #DAD1B4;
+  border-top-color: #ECE6D2;
+  font-size: 11px;
+  font-style: italic;
+  color: #666;
+  text-align: center;
+  padding: 0px 10px 0px 10px;
+  width: 778px;
+}
+
+/* =FLASH and ERRORS
+------------------------------------- */
+#spinner {
+  vertical-align: middle;
+  margin-left: 6px;
+}
+#flash_notice {
+  color: #090;
+  margin-bottom: 12px;
+  padding: 5px 10px;
+  background-color: #F8F5EE;
+}
+.errorExplanation {
+  padding: 5px 10px;
+  background-color: #F8F5EE;
+}
+.errorExplanation h2 {
+  color: #C00;
+  font-size: 16px;
+}
+.errorExplanation p {
+  margin-bottom: 6px;
+  font-style: italic;
+  color: #666;
+  font-size: 14px;
+}
+.errorExplanation ul {
+  margin: 0 20px;
+  font-size: 14px;
+}
+.fieldWithErrors {
+  display: inline;
+}
+
+/* =BOXES
+------------------------------------- */
+.form fieldset, 
+.details, 
+.meeting_list, 
+.highlight {
+  margin: 0 0 12px 0;
+  border: 1px solid #ECE6D2;
+  padding: 8px 12px;
+  background-color: #FCFBF7;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+/* =HOME
+------------------------------------- */
+.highlight {
+  margin: 24px 0;
+}
+.next_meeting,
+.join {
+  width: 340px;
+  float: left;
+}
+.next_meeting p, 
+.join p {
+  font-size: 14px;
+  color: #454545;
+}
+.next_meeting {
+  margin-right: 20px;
+}
+.next_meeting .location {
+  font-weight: bold;
+}
+.next_meeting .present {
+  font-style: italic;
+}
+
+/* =ADMIN
+------------------------------------- */
+.form legend {
+  font-weight: bold;
+}
+.form div {
+  line-height: 24px;
+  margin-bottom: 12px;
+}
+.form .text {
+  width: 450px;
+}
+.form .short {
+  width: 200px;
+}
+.form .radio {
+  vertical-align: top;
+}
+.details dl {
+  margin-top: 6px;
+}
+.details dt {
+  float: left;
+  width: 100px;
+  font-weight: bold;
+}
+.details ul {
+  list-style-type: none;
+}
+.details ul p.user {
+  font-style: italic;
+  font-size: 14px;
+}
+.details ul p.description {
+  color: #666;
+  font-size: 15px;
+}
+.details ul, 
+.details .add {
+  margin-left: 10px;
+}
+.details h3 span {
+  font-weight: normal;
+}
+
+/* =MEETINGS
+------------------------------------- */
+.meeting_list ul {
+  list-style: none;
+}
+.meeting_list li {
+  line-height: 24px;
+}
+.presentation_list {
+  margin: 0 10px;
+  font-size: 13px;
+  font-style: italic;
+}
+.add, .modify, .cancel {
+  font-size: 13px;
+}
+.submit {
+  vertical-align: middle;
+}
+
+/* =PRESENTATIONS
+------------------------------------- */
+#new_presentation {
+  margin-bottom: 12px;
+  border: 1px solid #ECE6D2;
+  padding: 12px;
+  background-color: #fff;
+}
+#new_presentation div {
+  width: 100%;
+}
+#new_presentation label {
+  display: block; 
+  float: left;
+  width: 100px;
+  font-size: 15px;
+}
+#new_presentation .submit {
+  margin-left: 100px;
+}
+#new_presentation #errorExplanation {
+  width: 680px;
+}
+.details #no_presentations {
+  color: #666;
+  font-size: 15px;
+  margin-left: 8px;
+}
+
+/* =MEMBERS
+------------------------------------- */
+.user_list ul {
+  margin: 0 0 12px 0;
+  list-style-type: none;
+  line-height: 24px;
+}
+.user_list li {
+  display: block;
+  padding: 6px 10px;
+}
+.user_list li.shade {
+  background-color: #F8F5EE;
+}
+.email {
+  font-size: 14px;
+}
+div.modify {
+  margin-top: 12px;
+}
+.user_list img {
+  vertical-align: middle;
+}
+img.profile {
+  float: left;
+  border: 1px solid #666;
+  margin-right: 12px;
+}
+.talks span {
+  font-size: 14px;
+  font-style: italic;
+  color: #666;
+}
+
+/* =Extra
+------------------------------------- */
+div.centerlist {
+	text-align: left;
+	margin-left: 40%;
+}
+
+ul.linklist {
+	margin-top:50px;
+}
+
+li.linklist {
+	line-height:2;
+}
+
+/* =Door Ben
+------------------------------------ */
+.recsfound{
+  font-size: 11px;
+  font-style: italic;
+  color: #666;
+}
+.pagination{
+	padding: 10px 0px 10px 0px;
+  font-size: 12px;
+  font-style: italic;
+  color: #666;
+}
+.readerflag{
+  font-size: 11px;
+  font-style: italic;
+  color: #666;
+}
+.small{
+  font-size: 11px;
+  color: #666;
+}
+.toleft{
+	float: left;
+}
+.toright{
+	float: right;
+}
+.message{
+	padding: 0px 0px 0px 10px;
+	font-size: 18px;
+	color: #C5275C;
+
+}
+.columnheader{
+	color: #C5275C;
+	font-weight: bold;
+}
+.line{
+	color: #ECE6D2;
+	background-color: #ECE6D2;
+	height: 2px;
+}
+.inputfield_switch{
+	position:relative;
+	visibility:hidden;
+}
+
+.wideselect{
+	max-width: 700px;
+}

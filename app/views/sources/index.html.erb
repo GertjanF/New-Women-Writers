@@ -1,0 +1,29 @@
+<h1>Sources</h1>
+
+<div class="form" method="get">
+
+<%= flash_notice %>
+
+<form name="formnaam" method="get">
+
+<%= navigation @sources, "source name" %>
+
+</form>
+</div>
+
+<%= will_paginate @sources %>
+
+<% if editor? %>
+	<!-- Add source button -->
+	<%= link_to image_tag("add.png", :border=>0),  new_source_path, :title => "add new source" %>
+<% end %>
+
+	<%= no_records(@sources) %>
+
+	<div class="sources_list" id="sources_list">
+		<%= render :partial => "sourcelist" %>
+	</div>
+	<div class="sources_list" id="sources_list">
+		<%= will_paginate @sources %>
+	</div>
+</div>

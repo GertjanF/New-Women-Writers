@@ -1,0 +1,28 @@
+<%= flash_notice %>
+
+<h1><%= link_to "Weblinks receptions:", :action => "index" %>
+ <%=h @reception_url.title %>
+</h1>
+<div class="details">
+<table class="reception_url details">
+<tr class="reception_url details"><td class="reception_url details">Reception:</td><td class="reception_url details"><% unless @reception_url.reception.nil? %><%= link_to h(@reception_url.reception.title), reception_path(:id => @reception_url.reception.id) %><% end %></td></tr>
+<tr class="reception_url details"><td class="reception_url details">Title:</td><td class="reception_url details"><%=h @reception_url.title %></td></tr>
+<tr class="reception_url details"><td class="reception_url details">Url:</td><td class="reception_url details"><a href="<%=h @reception_url.url %>"><%=h @reception_url.url %></a></td></tr>
+	<% if logged_in? %>
+		<tr><td colspan='2'><hr class="line" noshade="noshade" /></td></tr>
+		<tr class="reception_url details"><td class="reception_url details">Updated at:</td><td class="reception_url details"><%=h @reception_url.updated_at.strftime('%d %B %Y, %H:%M') %> </td></tr>
+	<% end %>
+</table>
+
+<% if editor? %>
+<p class="modify">
+	<div>
+		<%= edit_button(@reception_url, 'link') %>
+<% if admin? %>
+		<%= delete_button(@reception_url, 'link') %>
+<% end %>
+	</div>
+</p>
+<% end %>
+
+</div>
